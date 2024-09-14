@@ -1,0 +1,11 @@
+body{
+    background-color: #F4A261;
+}
+nav{
+    background-color: #E76F51;
+}
+
+.navbar-brand{
+    font-size: 1.5em;
+    font-weight: bold;
+}
