@@ -1,11 +1,21 @@
-body{
-    background-color: #F4A261;
-}
-nav{
-    background-color: #E76F51;
+:root {
+    --accent-color: #E43F6F;
+    --accent-secondary-color: #DFBBB1;
+    --text-color:#DFBBB1;
+    --bg-color: #2c2c2c;
 }
 
-.navbar-brand{
-    font-size: 1.5em;
-    font-weight: bold;
+body {
+    background-color: var(--accent-color);
+ 
 }
+
+.navbar-brand {
+    font-size: 2em;
+    font-weight: bold;
+    color:black;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.6);
+}
+
+#map { height: 100vh;
+width: 100vw; }
