@@ -1,0 +1,47 @@
+.card {
+    background-color: var(--post-color);
+    border-radius: 1em;
+    margin-left: 20em;
+    margin-right: 2em;
+}
+
+.card-header {
+    background-color: var(--accent-color);
+    color: #EBF5EE;
+    font-weight: bold;
+}
+.card-footer{
+    background-color: var(--post-color);
+}
+
+.category {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.accordion-item {
+    background-color: var(--post-color) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: 100%;
+
+}
+
+.accordion-button {
+    background-color: var(--post-color) !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.accordion-collapse{
+    max-height: 15em;
+    overflow-y: scroll;
+    scrollbar-color: var(--accent-color) var(--post-color);
+}
+
+.post-button{
+    background-color: var(--accent-color);
+    color: var(--post-color);
+}

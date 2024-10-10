@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react'
 import Post from './Post'
 import Sidebar from './Sidebar'
 import Modal from './Modal'
-function App() {
-  const [posts, setPosts] = useState([...Array(10).keys()])
+import { usePost } from './PostProvider'
+import { v4 as uuidv4 } from 'uuid'
 
-  const renderPosts = posts.map(_ => <Post />)
+function App() {
+  const {posts} = usePost()
+
+  const renderPosts = posts.map(_ => <Post id={uuidv4()} />)
 
   useEffect(() => {
 
     fetch('/register', {
       method: 'POST',
       body: JSON.stringify({ userName: 'jpelrah', password: '123456' }),
-      headers:{'Content-Type':'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json()).then(console.log)
 
 
@@ -20,7 +23,7 @@ function App() {
     fetch('/login', {
       method: 'POST',
       body: JSON.stringify({ userName: 'jpelrah', password: '123456' }),
-      headers:{'Content-Type':'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json()).then(console.log)
 
 
@@ -31,7 +34,7 @@ function App() {
   return (
     <>
       <Sidebar />
-      <div className='mb-5'>
+      <div className='m-5 px-5'>
         {renderPosts}
       </div>
       <Modal />

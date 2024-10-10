@@ -6,31 +6,34 @@
 
 body {
   background-color: var(--bg-color);
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h1 {
   color: var(--accent-color);
 }
 
-.card {
-  background-color: var(--post-color);
-  border-radius: 1em;
-  height: 25em;
-  margin-left: 16em;
-  margin-right: 2em;
+.home {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: var(--accent-color);
+  padding: 5em;
+  border-radius: 2em;
+  color: var(--bg-color);
 }
 
-.card-header {
-  background-color: var(--accent-color);
-  color: #EBF5EE;
+label {
   font-weight: bold;
 }
 
-.sidebar {
-  position: fixed;
-  height: 100vh;
-  width: 14em;
-  left: 0;
-  top: 0;
-  background-color: var(--accent-color)
+.custom-button,
+.custom-button:hover {
+  background-color: var(--post-color);
+  color: var(--accent-color);
 }
+
+
+
