@@ -20,7 +20,7 @@ export default function Post({ id, text }) {
 
         <div className="card-footer">
 
-            <Link to={`post/${id}`}>View</Link>
+            <Link className="btn post-button" to={`post/${id}`}>View</Link>
 
         </div>
 

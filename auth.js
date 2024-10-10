@@ -1,17 +1,19 @@
 import express from "express";
 import passport from "passport";
 import LocalStrategy from 'passport-local'
-import { findOrCreateUser } from "../db/index.js";
+import { findOrCreateUser } from "./db/index.js";
 
 // Configure the Google strategy for use by Passport.
 passport.use(new LocalStrategy(
     function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
+      console.log(username, password)
+
+    //   User.findOne({ username: username }, function (err, user) {
+    //     if (err) { return done(err); }
+    //     if (!user) { return done(null, false); }
+    //     if (!user.verifyPassword(password)) { return done(null, false); }
+    //     return done(null, user);
+    //   });
     }
   ));
 
@@ -30,17 +32,17 @@ passport.deserializeUser(function (profile, cb) {
 });
 
 // Create an Express router for authentication
-export const authRouter = express.Router();
+export const router = express.Router();
 
 
-authRouter.post('/login', 
+router.post('/login', 
     passport.authenticate('local', { failureRedirect: '/login' }),
     function(req, res) {
       res.redirect('/');
     });
 
 
-authRouter.post("/logout", function (req, res, next) {
+router.post("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err); // Handle logout error
@@ -50,6 +52,6 @@ authRouter.post("/logout", function (req, res, next) {
 });
 
 
-authRouter.get('/isLoggedIn', (req, res) => {
+router.get('/isLoggedIn', (req, res) => {
   req.user ? res.send(req.user) : res.send({}); // Send user info or empty object
 });

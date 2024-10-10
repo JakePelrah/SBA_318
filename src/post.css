@@ -3,6 +3,7 @@
     border-radius: 1em;
     margin-left: 20em;
     margin-right: 2em;
+    border: none;
 }
 
 .card-header {
@@ -41,7 +42,7 @@
     scrollbar-color: var(--accent-color) var(--post-color);
 }
 
-.post-button{
+.post-button, .post-button:hover{
     background-color: var(--accent-color);
     color: var(--post-color);
 }

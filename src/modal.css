@@ -1,0 +1,13 @@
+
+
+.modal-body, .modal-content {
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 1em;
+}
+
+.modal-body .form-control {
+    background-color: rgb(122, 122, 122) !important;
+    border: none;
+    color: white;
+}

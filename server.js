@@ -11,6 +11,7 @@ const SQLiteStore = connectSQLite(session)
 
 import { router as userRouter } from './src/routes/user.js';
 import { router as postRouter } from './src/routes/post.js'
+import {router as authRouter} from './auth.js'
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,6 +33,7 @@ app.use(session({
 // Initialize passport session management
 app.use(passport.authenticate('session'));
 
+app.use(authRouter)
 app.use(userRouter)
 app.use(postRouter)
 

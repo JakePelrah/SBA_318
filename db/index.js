@@ -8,6 +8,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 // id, title, category, text, tags
 
+
+export function findOrCreateUser(){
+    
+}
+
 export function createPost(userId, title, category, text, tags) {
     db.run("INSERT INTO posts VALUES(?,?,?,?,?,?)", [userId, uuidv4(), title, category, text, tags])
 }
