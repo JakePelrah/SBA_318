@@ -4,9 +4,10 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
-import { db } from './db/index.js';
+
 
 import { router as userRouter } from './src/routes/user.js';
+import {router as postRouter} from './src/routes/post.js'
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'dist'))); // Serve static files fro
 
 
 app.use(userRouter)
+app.use(postRouter)
+
 
 // Handle client-side routing, returning all requests to the app
 app.get('*', (_req, res) => {

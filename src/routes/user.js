@@ -7,15 +7,15 @@ export const router = express.Router()
 router.post('/register', async (req, res) => {
     // check username
     // hashpassword
-    const { userName, password } = req.body
-    const hashed =  await hashPass(password)
-    console.log(hashed)
+    // const { userName, password } = req.body
+    // const hashed =  await hashPass(password)
+    // console.log(hashed)
 
-    db.run("INSERT INTO user VALUES (?,?)", [userName, hashed])
+    // db.run("INSERT INTO user VALUES (?,?)", [userName, hashed])
 
-     const result = await compareHash(password, hashed)
+    //  const result = await compareHash(password, hashed)
 
-    res.json({ access: '' })
+    // res.json({ access: '' })
 })
 
 

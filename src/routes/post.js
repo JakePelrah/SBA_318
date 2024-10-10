@@ -1,20 +1,13 @@
 import express from "express";
 import { hashPass, compareHash } from "./crypt.js";
-import { db } from "../../db/index.js";
+import { db, createPost } from "../../db/index.js";
 
 export const router = express.Router()
 
-router.get('/register', async (req, res) => {
-    // check username
-    // hashpassword
-    const { userName, password } = req.body
-    const hashed =  await hashPass(password)
-    console.log(hashed)
 
-    db.run("INSERT INTO user VALUES (?,?)", [userName, hashed])
 
-     const result = await compareHash(password, hashed)
+router.post('/createPost', (req, res) => {
+    const { id, title, text, category, tags } = req.body
+    createPost(id, title, category, text, tags)
 
-    res.json({ access: '' })
 })
-

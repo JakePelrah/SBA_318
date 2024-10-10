@@ -23,7 +23,6 @@ export default function Sidebar() {
 
         <div>
             <div className='sidebar-title ms-3 mt-5'>Users</div>
-
             <ul class="list-group">
                 {renderedUsers}
             </ul>
