@@ -1,0 +1,36 @@
+:root {
+  --accent-color: #283044;
+  --post-color: #BFA89E;
+  --bg-color: #8B786D;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+h1 {
+  color: var(--accent-color);
+}
+
+.card {
+  background-color: var(--post-color);
+  border-radius: 1em;
+  height: 25em;
+  margin-left: 16em;
+  margin-right: 2em;
+}
+
+.card-header {
+  background-color: var(--accent-color);
+  color: #EBF5EE;
+  font-weight: bold;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  width: 14em;
+  left: 0;
+  top: 0;
+  background-color: var(--accent-color)
+}
