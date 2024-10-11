@@ -11,11 +11,9 @@ passport.use(new LocalStrategy(
 
     db.all("SELECT * FROM users WHERE username = ? AND password = ? ", [username, password], function (err, rows) {
       if (rows.length>0) {
-        console.log(rows)
         return done(null, rows[0]);
       }
       if (rows.length ===0) {
-        console.log('creating user')
         const id = uuidv4()
         db.run("INSERT into users VALUES(?,?,?) RETURNING *", [id, username, password], function (err, res) {
           if (err) { return done(err); }
