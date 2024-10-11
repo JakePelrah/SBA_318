@@ -48,16 +48,18 @@ router.post('/auth',
   });
 
 router.get('/checkLogin', (req, res) => {
-  if (req.user, req.session) {
+  if (req.user?.id) {
     res.json({ loggedIn: true })
   } else {
     res.json({ loggedIn: false })
   }
 })
 
-router.post('/logout', function (req, res) {
+router.post('/logout', function (req, res, next) {
   req.logout(function (err) {
-    console.log('herer')
+    if(err){
+      return next(err)
+    }
     res.json({ loggedIn: false })
   });
 });
