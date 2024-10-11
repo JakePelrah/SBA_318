@@ -1,25 +1,29 @@
-import { useEffect, useState } from 'react'
 import Post from './Post'
 import Sidebar from './Sidebar'
-import Modal from './Modal'
 import { usePost } from './PostProvider'
-import { v4 as uuidv4 } from 'uuid'
 import Navbar from './Navbar'
+import Modal from './Modal'
 
 function App() {
   const { posts } = usePost()
 
-  const renderPosts = posts.map(_ => <Post id={uuidv4()} />)
+  const renderPosts = posts.map(post => <Post key={post.postUUID}
+    category={post.category}
+    title={post.title}
+    text={post.text}
+    dateTime={post.dateTime}
+    tags={post.tags}
+    username={post.username} />)
 
 
   return (
     <>
       <Navbar />
       <Sidebar />
+      <Modal />
       <div className='m-5 px-5'>
         {renderPosts}
       </div>
-      <Modal />
     </>
 
   )

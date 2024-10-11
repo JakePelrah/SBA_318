@@ -11,7 +11,8 @@
     color: #EBF5EE;
     font-weight: bold;
 }
-.card-footer{
+
+.card-footer {
     background-color: var(--post-color);
 }
 
@@ -36,13 +37,19 @@
     box-shadow: none !important;
 }
 
-.accordion-collapse{
+.accordion-collapse {
     max-height: 15em;
     overflow-y: scroll;
     scrollbar-color: var(--accent-color) var(--post-color);
 }
 
-.post-button, .post-button:hover{
+.post-button,
+.post-button:hover {
     background-color: var(--accent-color);
     color: var(--post-color);
+}
+
+.badge {
+    background-color: var(--accent-color) !important;
+    margin: .25em;
 }

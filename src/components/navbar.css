@@ -1,7 +1,7 @@
 .navbar{
     background-color: var(--accent-color);
     border-bottom: .1em solid black;  
-    height: 4em;  
+    height: 4.5em;  
 }
 
 .navbar-brand{

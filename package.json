@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "connect-sqlite3": "^0.9.15",
+    "bootstrap": "^5.3.3",
+    "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "passport": "^0.7.0",
@@ -21,7 +22,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "sqlite3": "^5.1.7",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "uuid-readable": "^0.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

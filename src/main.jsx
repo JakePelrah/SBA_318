@@ -1,15 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import CreateView from './CreateView.jsx';
-import PostView from './PostView.jsx';
-import UserView from './UserView.jsx';
-import App from './App.jsx'
+import App from './components/App.jsx'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import PostProvider from './PostProvider.jsx';
+import PostProvider from './components/PostProvider.jsx';
 
 
 const router = createBrowserRouter([
@@ -17,18 +14,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />
-  },
-  {
-    path: '/post/:id',
-    element: <PostView />
-  },
-  {
-    path: '/user/:id',
-    element: <UserView />
-  },
-  {
-    path: '/create/:id',
-    element: <CreateView />
   }
 ]);
 

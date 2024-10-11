@@ -2,36 +2,35 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
-import passport from 'passport';
 import session from 'express-session';
-import connectSQLite from 'connect-sqlite3'
+import cookieParser from 'cookie-parser'
+import passport from 'passport'
 
-const SQLiteStore = connectSQLite(session)
 
 
 import { router as userRouter } from './src/routes/user.js';
 import { router as postRouter } from './src/routes/post.js'
-import {router as authRouter} from './auth.js'
+import { router as authRouter } from './src/routes/auth.js'
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express()
 const port = 3000
 
-
+app.use(cookieParser());
 app.use(express.json()); // Parse JSON bodies
 app.use(express.static(path.join(__dirname, 'dist'))); // Serve static files from 'dist'
 
 // Configure session management
 app.use(session({
-  store: new SQLiteStore({ db: 'sba318.db', dir: './db' }),
-  secret: 'cat', // Secret for session encryption
-  resave: false, // Prevent resaving unchanged sessions
-  saveUninitialized: false, // Don't save uninitialized sessions
+  secret: 'cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { httpOnly: true, secure: false, maxAge: 60 * 1000 },
 }));
 
-// Initialize passport session management
 app.use(passport.authenticate('session'));
+
 
 app.use(authRouter)
 app.use(userRouter)
