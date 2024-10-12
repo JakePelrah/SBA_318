@@ -10,6 +10,7 @@ import passport from 'passport'
 import { router as userRouter } from './src/routes/user.js';
 import { router as postRouter } from './src/routes/post.js'
 import { router as authRouter } from './src/routes/auth.js'
+import {router  as commentRouter} from './src/routes/comment.js'
 
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -34,6 +35,8 @@ app.use(passport.authenticate('session'));
 app.use(authRouter)
 app.use(userRouter)
 app.use(postRouter)
+app.use(commentRouter)
+
 
 
 // Handle client-side routing, returning all requests to the app

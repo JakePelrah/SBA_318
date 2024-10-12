@@ -78,10 +78,28 @@ export default function PostProvider({ children }) {
         }).then(res => res.json())
     }
 
+    function getCommentsByPostId(id) {
+        return fetch('/getCommentsByPostId', {
+            method: 'POST',
+            body: JSON.stringify({ id }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+    }
+
+    function createComment(text, postUUID) {
+       return fetch('/createComment', {
+            method: 'POST',
+            body: JSON.stringify({ text, postUUID }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res=>res.json())
+    }
+
+
     return (
         <PostContext.Provider value={{
             posts, users, tags, createPost,
-            auth, loggedIn, logout, getPostById
+            auth, loggedIn, logout, getPostById, getCommentsByPostId, 
+            createComment
         }}>
             {children}
         </PostContext.Provider>

@@ -3,6 +3,8 @@
     border-radius: 1em;
     margin-left: 12em;
     border: none;
+    color: var(--text-color) !important;
+
 }
 
 .card-body {
@@ -26,6 +28,10 @@
 }
 
 
+#post-view {
+    background-color: var(--post-color);
+    border-radius: .15em;
+}
 
 .post-button,
 .post-button:hover {
@@ -38,12 +44,34 @@
     margin: .25em;
 }
 
-.post-title{
+.post-title {
     font-weight: bold;
     font-size: 3em;
     background-color: var(--accent-color);
-    padding:  0em 1em 0em 1em;
-    color:var(--post-color);
+    padding: 0em 1em 0em 1em;
+    color: var(--post-color);
     border: 1px solid var(--accent-color);
     border-radius: .25em;
+}
+
+.link {
+    font-weight: bold;
+}
+
+hr {
+    height: 1px !important;
+    color: #000000 !important;
+    background-color: #000000 !important;
+}
+
+.comment{
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: .15em;
+    padding: 1em;
+}
+.comment-header{
+    background-color: var(--accent-color);
+    color: white;
+    padding: .25em;
+    border-radius: .15em;
 }

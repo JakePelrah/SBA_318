@@ -36,7 +36,6 @@ JOIN
     main.posts AS p ON u.userUUID = p.userUUID
 WHERE 
     p.postUUID = ?;` , [id], function (err, row) {
-        console.log(err, row[0])
         if (err) {
             res.json({})
         } else {
