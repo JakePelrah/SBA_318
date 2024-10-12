@@ -31,8 +31,6 @@ export default function Modal() {
     modalRef.current.hide()
   }
 
-
-
   function onClose() {
     setCategory('')
     setTags('')

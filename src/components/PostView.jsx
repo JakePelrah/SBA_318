@@ -20,7 +20,7 @@ export default function PostView() {
         e.preventDefault()
         if (comment) {
             createComment(comment, id)
-            .then(() => getCommentsByPostId(id).then(setComments))
+                .then(() => getCommentsByPostId(id).then(setComments))
             setComment('')
         }
     }
