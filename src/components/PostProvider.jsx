@@ -61,10 +61,10 @@ export default function PostProvider({ children }) {
         })
     }
 
-    function createPost(postUUID, title, category, text, tags, username, password) {
+    function createPost(title, category, text, tags) {
         fetch('/createPost', {
             method: 'POST',
-            body: JSON.stringify({ postUUID, title, category, text, tags, username, password }),
+            body: JSON.stringify({title, category, text, tags }),
             headers: { 'Content-Type': 'application/json' }
         }).then(() => getPosts())
     }

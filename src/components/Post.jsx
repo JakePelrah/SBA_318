@@ -19,7 +19,7 @@ export default function Post({ title, category, text, dateTime, tags, username }
             </p>
         </div>
         <div className="card-footer d-flex justify-content-between">
-            <div className="d-flex align-items-center fw-bold" ><img className="me-2" src="./icons/person-square.svg"></img>{username.toUpperCase()}</div>
+            <div className="d-flex align-items-center fw-bold" ><img className="me-2" src="./icons/person-square.svg"></img>{username}</div>
             <div className="d-flex justify-content-center align-items-center">
                 {renderTags}
             </div>

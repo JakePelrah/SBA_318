@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePost } from './PostProvider'
-import { v4 as uuidv4 } from 'uuid'
+
 import './modal.css'
 
 
@@ -10,9 +10,6 @@ export default function Modal() {
   const [text, setText] = useState('')
   const [category, setCategory] = useState('')
   const [tags, setTags] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [postUUID, setPostUUID] = useState('')
   const modalRef = useRef(null)
 
 
@@ -20,11 +17,9 @@ export default function Modal() {
 
     modalRef.current = new bootstrap.Modal('.modal')
 
-    modalRef.current._element.addEventListener('shown.bs.modal', onOpen)
     modalRef.current._element.addEventListener('hidden.bs.modal', onClose)
 
     return () => {
-      modalRef.current?._element.removeEventListener('shown.bs.modal', onOpen)
       modalRef.current?._element.removeEventListener('hidden.bs.modal', onClose)
     }
   }, [])
@@ -32,23 +27,18 @@ export default function Modal() {
 
   function validateForm(e) {
     e.preventDefault()
-    createPost(postUUID, title, category, text, tags, username, password)
+    console.log(999)
+    createPost(title, category, text, tags)
     modalRef.current.hide()
   }
 
-  function onOpen() {
-    const postId = uuidv4()
-    setPostUUID(postId)
-  }
+
 
   function onClose() {
     setCategory('')
-    setPassword('')
-    setPostUUID('')
     setTags('')
     setText('')
     setTitle('')
-    setUsername('')
   }
 
   return (
@@ -78,7 +68,7 @@ export default function Modal() {
                 <div className="form-text">Comma separated tags</div>
               </div>
 
-              <button onSubmit={validateForm} type="submit" className="btn btn-primary">Save</button>
+              <button onClick={validateForm} className="btn btn-primary">Save</button>
             </form>
           </div>
 
