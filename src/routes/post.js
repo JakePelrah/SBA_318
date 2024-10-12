@@ -21,8 +21,21 @@ router.post('/createPost', (req, res) => {
 
 router.post('/getPostById', (req, res) => {
     const { id } = req.body
-    console.log(req.body)
-    db.all("SELECT * FROM posts WHERE postUUID = ?", [id], function (err, row) {
+    db.all(`SELECT 
+    u.userUUID,
+    u.username,
+    p.postUUID,
+    p.title,
+    p.category,
+    p.text,
+    p.tags,
+    p.dateTime
+FROM 
+    main.users AS u
+JOIN 
+    main.posts AS p ON u.userUUID = p.userUUID
+WHERE 
+    p.postUUID = ?;` , [id], function (err, row) {
         console.log(err, row[0])
         if (err) {
             res.json({})

@@ -21,10 +21,7 @@ export default function Post({ title, category, text, dateTime, tags, username, 
         </div>
         <div className="card-footer d-flex justify-content-between">
 
-            <div className="d-flex align-items-center fw-bold" >
-                <img className="me-2" src="./icons/person-square.svg">
-                </img>{username}
-            </div>
+        
 
             <span>{dateTime}</span>
 

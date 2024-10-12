@@ -16,6 +16,10 @@ export default function PostView() {
         <div>Tags:{post?.tags}</div>
 
         <div>Published:{post?.dateTime}</div>
+        <div className="d-flex align-items-center fw-bold" >
+            <img className="me-2" src="../../icons/person-square.svg">
+            </img>{post?.username}
+        </div>
 
         <p className="mt-5">{post?.text}</p>
 
