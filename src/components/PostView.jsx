@@ -6,13 +6,9 @@ export default function PostView() {
     const { id } = useParams()
     const [post, setPost] = useState(null)
 
-
     useEffect(() => {
         getPostById(id).then(setPost)
     }, [])
-
-
-  
 
     return (<div className="d-flex flex-column align-items-center m-5">
 
