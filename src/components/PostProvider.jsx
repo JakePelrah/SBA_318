@@ -50,7 +50,7 @@ export default function PostProvider({ children }) {
         .then(res=>res.json())
         .then(({ registered }) => {
             if (!registered) {
-                alert('check username, password or register for an account')
+                alert('Are you already registered? Check username and password')
             }
             else {
                 setLoggedIn(true)
