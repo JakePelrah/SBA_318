@@ -49,12 +49,10 @@ export default function PostProvider({ children }) {
         })
         .then(res=>res.json())
         .then(({ registered }) => {
-            console.log('here', registered)
             if (!registered) {
                 alert('check username, password or register for an account')
             }
             else {
-                console.log('herer')
                 setLoggedIn(true)
                 getUsers()
                 getPosts()
