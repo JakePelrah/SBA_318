@@ -8,8 +8,8 @@ export default function Post({ title, category, text, dateTime, tags, username, 
 
     return (<div className="card my-5">
         <div className="card-header d-flex align-items-center justify-content-between">
-            <div className="category"> {category} </div>
-            <span> {title}</span>
+            <div className="category d-none d-md-block"> {category} </div>
+            <span className="d-none d-md-block"> {title}</span>
             <Link className="btn custom-button" to={`postView/${postUUID}`}>View More</Link>
         </div>
 
@@ -19,13 +19,12 @@ export default function Post({ title, category, text, dateTime, tags, username, 
                 
             </p>
         </div>
-        <div className="card-footer d-flex justify-content-between">
+        <div className="card-footer d-flex justify-content-between ">
 
         
+            <span className="d-none d-md-block">{dateTime}</span>
 
-            <span>{dateTime}</span>
-
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center d-none d-md-block">
                 {renderTags}
             </div>
         </div>

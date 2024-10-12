@@ -16,10 +16,10 @@ export default function Navbar() {
     }
 
 
-    return (<nav className="navbar">
+    return (<nav className="navbar sticky-top">
         <div className="container-fluid">
 
-            <a className="navbar-brand" href="#">Programming Posts</a>
+            <a className="navbar-brand d-none d-sm-block" href="#">Tech Blog</a>
 
             {loggedIn ? <button onClick={logout} className='btn custom-button'>LOGOUT</button> :
                 <form onSubmit={validate}>

@@ -2,6 +2,9 @@
     background-color: var(--accent-color);
     border-bottom: .1em solid black;  
     height: 4.5em;  
+    position: sticky;
+    
+    
 }
 
 .navbar-brand{
