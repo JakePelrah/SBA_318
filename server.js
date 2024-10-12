@@ -4,6 +4,8 @@ import express from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
+import { logRequest } from './db.js';
+import uaParser from 'ua-parser-js'
 
 // import routers
 import { router as userRouter } from './src/routes/user.js';
@@ -31,10 +33,9 @@ app.use(passport.authenticate('session'));
 
 ///////////////////////////////// Custom Middleware /////////////////////////////////
 app.use((req, res, next) => {
-  const userAgent = req.get('User-Agent')
-  console.log(userAgent)
-  next()
-})
+  logRequest(req)
+  next();
+});
 
 
 // routers

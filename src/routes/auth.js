@@ -1,8 +1,7 @@
 import express from "express";
 import LocalStrategy from 'passport-local'
 import passport from "passport";
-import { v4 as uuidv4 } from 'uuid'
-import { db } from "../../db/index.js"
+import { createUser, findUser } from "../../db.js";
 
 export const router = express.Router()
 
@@ -11,38 +10,30 @@ passport.use(new LocalStrategy({
   passwordField: 'password', // Customize the field name if necessary
   passReqToCallback: true
 },
-  function (req, username, password, done) {
+  async function (req, username, password, done) {
     const { register } = req.body
 
     if (register) {
 
-      const id = uuidv4()
-      db.run("INSERT into users (userUUID, username, password) VALUES(?,?,?)", [id, username, password], function (err) {
-        db.get(`SELECT * FROM users WHERE userUUID = ?`, [id], (err, row) => {
-          if (err) {
-            if (err) { return done(err); }
-          } else {
-
-            return done(null, row);
-          }
-        });
-      })
+      const user = await createUser(username, password)
+      if (user) {
+        return done(null, user);
+      }
+      return done(null, false)
     }
     else {
-      db.all("SELECT * FROM users WHERE username = ? AND password = ? ", [username, password], function (err, rows) {
-        if (err) { return done(err); }
-        if (rows.length === 0) { return done(null, false); }
-        if (rows.length > 0) {
-          return done(null, rows[0]);
-        }
-      })
+      const user = await findUser(username, password)
+      if (user) {
+        return done(null, user);
+      }
+      return done(null, false);
     }
   }
 ));
 
 passport.serializeUser(function (user, cb) {
   process.nextTick(function () {
-    cb(null, { id: user.userUUID, username: user.username });
+    cb(null, { id: user.user_id, username: user.username });
   });
 });
 
@@ -61,7 +52,7 @@ router.post('/auth', (req, res, next) => {
     else {
       req.logIn(user, function (err) {
         if (err) { return next(err); }
-        user = { id: user.userUUID, username: user.username }
+        user = { id: user.user_id, username: user.username }
         return res.json(user)
       })
 

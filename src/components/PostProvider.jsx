@@ -52,6 +52,7 @@ export default function PostProvider({ children }) {
         })
             .then(res => res.json())
             .then(user => {
+                console.log(user)
                 if (!user.id) {
                     alert('Are you already registered? Check username and password')
                 }
