@@ -18,9 +18,7 @@ passport.use(new LocalStrategy({
 
       const id = uuidv4()
       db.run("INSERT into users (userUUID, username, password) VALUES(?,?,?)", [id, username, password], function (err) {
-       console.log(err, register)
         db.get(`SELECT * FROM users WHERE userUUID = ?`, [id], (err, row) => {
-          console.log(err, row, id)
           if (err) {
             if (err) { return done(err); }
           } else {

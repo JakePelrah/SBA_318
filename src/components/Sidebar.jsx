@@ -5,7 +5,6 @@ import './sidebar.css'
 export default function Sidebar() {
     const { users, tags, loggedIn } = usePost()
 
-    console.log(users)
     const renderedUsers = users.map(user => <li key={uuidv4()} className="list-group-item">
         <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
         {user.username}

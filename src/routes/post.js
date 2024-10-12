@@ -6,10 +6,8 @@ export const router = express.Router()
 
 router.post('/createPost', (req, res) => {
     const { id } = req.user
-    console.log(req.user, 'herer')
     const { postUUID, title, category, text, tags, username, password } = req.body
     db.run("INSERT INTO posts (postUUID, userUUID, title, category, text, tags, username, password, dateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [postUUID, id, title, category, text, tags.toString(), username, password, new Date().toLocaleString()], function (err) {
-        console.log('hereer')
         if (err) {
             console.error("Error inserting post: ", err.message);
             res.json({ created: false })

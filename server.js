@@ -39,7 +39,6 @@ app.use(postRouter)
 
 // Handle client-side routing, returning all requests to the app
 app.get('*', (_req, res) => {
-  console.log(res.locals); // Log local response variables
   res.sendFile(path.join(__dirname, 'dist', 'index.html')); // Send index.html for client-side routing
 });
 
