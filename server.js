@@ -1,4 +1,3 @@
-// Import necessary modules
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
@@ -6,13 +5,12 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 
-
+// import routers
 import { router as userRouter } from './src/routes/user.js';
 import { router as postRouter } from './src/routes/post.js'
 import { router as authRouter } from './src/routes/auth.js'
-import {router  as commentRouter} from './src/routes/comment.js'
+import { router as commentRouter } from './src/routes/comment.js'
 
-// Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express()
 const port = 3000
@@ -25,13 +23,21 @@ app.use(express.static(path.join(__dirname, 'dist'))); // Serve static files fro
 app.use(session({
   secret: 'cat',
   resave: false,
-  saveUninitialized: true,
-  cookie: { httpOnly: true, secure: false, maxAge: 60 * 1000 },
+  saveUninitialized: false,
+  cookie: { secure: false }
 }));
-
 app.use(passport.authenticate('session'));
 
 
+///////////////////////////////// Custom Middleware /////////////////////////////////
+app.use((req, res, next) => {
+  const userAgent = req.get('User-Agent')
+  console.log(userAgent)
+  next()
+})
+
+
+// routers
 app.use(authRouter)
 app.use(userRouter)
 app.use(postRouter)
@@ -39,7 +45,6 @@ app.use(commentRouter)
 
 
 
-// Handle client-side routing, returning all requests to the app
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html')); // Send index.html for client-side routing
 });

@@ -8,20 +8,17 @@ export default function Navbar() {
     const [register, setRegister] = useState(false)
     const { auth, loggedIn, logout } = usePost()
 
-
     function validate(e) {
         e.preventDefault()
         auth(username, password, register)
         setRegister(false)
     }
-
-
     return (<nav className="navbar sticky-top">
         <div className="container-fluid">
 
             <a className="navbar-brand d-none d-sm-block" href="#">Tech Blog</a>
 
-            {loggedIn ? <button onClick={logout} className='btn custom-button'>LOGOUT</button> :
+            {loggedIn.id ? <button onClick={logout} className='btn custom-button'>LOGOUT</button> :
                 <form onSubmit={validate}>
                     <div class="input-group">
                         <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" class="form-control form-control-sm" placeholder="Username" required minLength={5} />
@@ -30,7 +27,7 @@ export default function Navbar() {
                     </div>
 
                     <div class="form-check">
-                        <input value={register} onChange={(e)=>setRegister(e.target.checked)} class="form-check-input" type="checkbox" id="flexCheckDefault" />
+                        <input value={register} onChange={(e) => setRegister(e.target.checked)} class="form-check-input" type="checkbox" id="flexCheckDefault" />
                         <label className='text-white' for="flexCheckDefault">
                             Register?
                         </label>

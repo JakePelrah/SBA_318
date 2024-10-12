@@ -53,16 +53,16 @@ passport.deserializeUser(function (user, cb) {
 });
 
 router.post('/auth', (req, res, next) => {
-
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
     if (!user) {
-      return res.json({ registered: false })
+      return res.json({})
     }
     else {
       req.logIn(user, function (err) {
         if (err) { return next(err); }
-        return res.json({ registered: true })
+        user = { id: user.userUUID, username: user.username }
+        return res.json(user)
       })
 
     }
@@ -73,9 +73,9 @@ router.post('/auth', (req, res, next) => {
 
 router.get('/checkLogin', (req, res) => {
   if (req.user?.id) {
-    res.json({ loggedIn: true })
+    res.json(req.user)
   } else {
-    res.json({ loggedIn: false })
+    res.json({})
   }
 })
 
@@ -84,7 +84,7 @@ router.post('/logout', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json({ loggedIn: false })
+    res.json({})
   });
 });
 

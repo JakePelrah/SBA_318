@@ -1,6 +1,6 @@
 import express from "express";
 import { db } from "../../db/index.js";
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 export const router = express.Router()
 
@@ -27,7 +27,6 @@ WHERE
     });
 })
 
-
 router.post('/createComment', (req, res) => {
     const { text, postUUID } = req.body
     const { id } = req.user
@@ -39,6 +38,34 @@ router.post('/createComment', (req, res) => {
         } else {
             console.log(`Post created with postUUID: ${id}`);
             res.json({ created: true })
+        }
+    });
+})
+
+
+router.patch('/patchComment', (req, res) => {
+    const { text, commentUUID } = req.body
+    db.run("UPDATE comments SET text = ?, dateTime = ? WHERE commentUUID = ?", [text, new Date().toLocaleString(), commentUUID], function (err) {
+        if (err) {
+            console.error("Error updating comment: ", err.message);
+            res.json({ updated: false });
+        } else {
+            console.log(`Comment updated with commentUUID: ${commentUUID}`);
+            res.json({ updated: true });
+        }
+    });
+})
+
+router.delete('/deleteComment', (req, res) => {
+    const { commentUUID } = req.body
+
+    db.run("DELETE FROM comments WHERE commentUUID = ?", [commentUUID], function (err) {
+        if (err) {
+            console.error("Error deleting comment: ", err.message);
+            res.json({ deleted: false });
+        } else {
+            console.log(`Comment deleted with commentUUID: ${commentUUID}`);
+            res.json({ deleted: true });
         }
     });
 })

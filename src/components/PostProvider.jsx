@@ -5,9 +5,10 @@ export const usePost = () => useContext(PostContext)
 
 export default function PostProvider({ children }) {
     const [posts, setPosts] = useState([])
+    const [currentPost, setCurrentPost] = useState({})
     const [users, setUsers] = useState([])
-    const [tags, setTags] = useState([...Array(10).keys()])
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [comments, setComments] = useState([])
+    const [loggedIn, setLoggedIn] = useState({})
 
     useEffect(() => {
         getPosts()
@@ -20,6 +21,7 @@ export default function PostProvider({ children }) {
             .then(res => res.json())
             .then(setPosts)
     }
+
     function getUsers() {
         fetch('/users')
             .then(res => res.json())
@@ -29,14 +31,15 @@ export default function PostProvider({ children }) {
     function checkLogin() {
         fetch('/checkLogin')
             .then(res => res.json())
-            .then(({ loggedIn }) => setLoggedIn(loggedIn))
+            .then(data=>{console.log(data); return data})
+            .then(user => setLoggedIn(user))
     }
 
     function logout(e) {
         e.preventDefault()
         fetch('/logout', { method: 'POST' })
             .then(res => res.json())
-            .then(({ loggedIn }) => setLoggedIn(loggedIn))
+            .then(user => setLoggedIn(user))
     }
 
     function auth(username, password, register) {
@@ -48,14 +51,12 @@ export default function PostProvider({ children }) {
             }
         })
             .then(res => res.json())
-            .then(({ registered }) => {
-                if (!registered) {
+            .then(user => {
+                if (!user.id) {
                     alert('Are you already registered? Check username and password')
                 }
                 else {
-                    setLoggedIn(true)
-                    getUsers()
-                    getPosts()
+                    setLoggedIn(user)
                     checkLogin()
                 }
             })
@@ -71,35 +72,62 @@ export default function PostProvider({ children }) {
 
 
     function getPostById(id) {
-        return fetch('/getPostById', {
+        fetch('/getPostById', {
             method: 'POST',
             body: JSON.stringify({ id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
+            .then(setCurrentPost)
     }
 
     function getCommentsByPostId(id) {
-        return fetch('/getCommentsByPostId', {
+        fetch('/getCommentsByPostId', {
             method: 'POST',
             body: JSON.stringify({ id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
+            .then(setComments)
     }
 
-    function createComment(text, postUUID) {
-       return fetch('/createComment', {
+    function createComment(text) {
+        const { postUUID } = currentPost
+        fetch('/createComment', {
             method: 'POST',
             body: JSON.stringify({ text, postUUID }),
             headers: { 'Content-Type': 'application/json' }
-        }).then(res=>res.json())
+        }).then(res => res.json())
+            .then(() => getCommentsByPostId(postUUID))
+    }
+
+
+    function patchComment(commentUUID, text){
+        const { postUUID } = currentPost
+        fetch('/patchComment', {
+            method: 'PATCH',
+            body: JSON.stringify({ text, commentUUID }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+            .then(() => getCommentsByPostId(postUUID))
+    }
+
+    function deleteComment(commentUUID){
+        const { postUUID } = currentPost
+        fetch('/deleteComment', {
+            method: 'DELETE',
+            body: JSON.stringify({ commentUUID }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+            .then(() => getCommentsByPostId(postUUID))
     }
 
 
     return (
         <PostContext.Provider value={{
-            posts, users, tags, createPost,
-            auth, loggedIn, logout, getPostById, getCommentsByPostId, 
-            createComment
+            auth, loggedIn, logout,
+            posts, users, comments, currentPost,
+            createPost, 
+            getPostById, getCommentsByPostId,
+            createComment, patchComment, deleteComment
         }}>
             {children}
         </PostContext.Provider>

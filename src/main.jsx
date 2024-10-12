@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import './index.css'
 import PostProvider from './components/PostProvider.jsx';
-
+import FourOhFour from './components/404.jsx';
+import FiveHundred from './components/500.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,14 @@ const router = createBrowserRouter([
   {
     path:'/postView/:id',
     element:<PostView/>
+  },
+  {
+    path:'/404',
+    element:<FourOhFour/>
+  },
+  {
+    path:'/500',
+    element:<FiveHundred/>
   }
 ]);
 

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import './sidebar.css'
 
 export default function Sidebar() {
-    const { users, tags, loggedIn } = usePost()
+    const { users, loggedIn } = usePost()
 
     const renderedUsers = users.map(user => <li key={uuidv4()} className="list-group-item">
         <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
@@ -11,10 +11,6 @@ export default function Sidebar() {
         <div className='uuid'>({user.userUUID})</div>
     </li>)
 
-    const renderedTags = tags.map(_ => <li key={uuidv4()} className="list-group-item">
-        <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-        tags
-    </li>)
 
 
 
@@ -30,12 +26,12 @@ export default function Sidebar() {
         <div>
             <div className='sidebar-title ms-3 mt-3'>Tags</div>
             <ul className="list-group">
-                {renderedTags}
+              
             </ul>
         </div>
 
         <div className='d-flex justify-content-center'>
-            {loggedIn ?
+            {loggedIn.id ?
                 <div data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn custom-button mt-5">Create Post</div>
                 : null}
         </div>

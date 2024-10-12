@@ -16,7 +16,6 @@ export default function Modal() {
   useEffect(() => {
 
     modalRef.current = new bootstrap.Modal('.modal')
-
     modalRef.current._element.addEventListener('hidden.bs.modal', onClose)
 
     return () => {

@@ -1,54 +1,49 @@
 import { Link, useParams } from "react-router-dom"
 import { usePost } from "./PostProvider"
 import { useEffect, useState } from "react"
+import Comment from "./Comment"
 import './post.css'
 
 export default function PostView() {
-    const { getPostById, getCommentsByPostId, createComment, loggedIn } = usePost()
+    const { getPostById, getCommentsByPostId, createComment, loggedIn, comments, currentPost } = usePost()
     const { id } = useParams()
-    const [post, setPost] = useState([])
-    const [comments, setComments] = useState([])
-    const [comment, setComment] = useState('')
+    const [newComment, setNewComment] = useState('')
 
     useEffect(() => {
-        getPostById(id).then(setPost)
-        getCommentsByPostId(id).then(setComments)
+        getPostById(id)
+        getCommentsByPostId(id)
     }, [])
-
 
     function onClick(e) {
         e.preventDefault()
-        if (comment) {
-            createComment(comment, id)
-                .then(() => getCommentsByPostId(id).then(setComments))
-            setComment('')
+        if (newComment) {
+            createComment(newComment)
+            setNewComment('')
         }
     }
 
-    const renderComments = comments?.map(comment =>
-        <div className="comment d-flex flex-column mb-3">
-            <div className="comment-header d-flex justify-content-between">
-                <div >{comment.username}</div>
-                <div> {comment.dateTime}</div>
-            </div>
-            <div className="mt-2"> {comment.text}</div>
-        </div>)
+    const renderComments = comments?.map(comment => <Comment
+        username={comment.username}
+        text={comment.text}
+        dateTime={comment.dateTime}
+        userUUID={comment.userUUID}
+        commentUUID={comment.commentUUID} />)
 
     return (<div id='post-view' className="d-flex flex-column  m-5 p-5">
 
         <Link className="mb-5 link" to='/'>Home</Link>
 
-        <h1 className="post-title text-center">{post?.title}</h1>
+        <h1 className="post-title text-center">{currentPost?.title}</h1>
 
         <div className="d-flex flex-column mt-5 justify-content-start">
             <div className="d-flex align-items-center fw-bold" >
                 <img className="me-2" src="../../icons/person-square.svg">
-                </img>{post?.username}
+                </img>{currentPost?.username}
             </div>
-            <div>Published:{post?.dateTime}</div>
+            <div>Published:{currentPost?.dateTime}</div>
         </div>
 
-        <p className="mt-5">{post?.text}</p>
+        <p className="mt-5">{currentPost?.text}</p>
 
         <div className="d-flex justify-content-center">
             <div className="fw-bold">Comments</div>
@@ -56,13 +51,12 @@ export default function PostView() {
 
         <div className="mt-5">{renderComments}</div>
 
-        {loggedIn ?
+        {loggedIn.id ?
             <form className="d-flex flex-column mt-5 align-items-center">
-                <textarea value={comment} onChange={(e) => setComment(e.target.value)} className="form-control"></textarea>
+                <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} className="form-control"></textarea>
                 <button onClick={onClick} className="btn post-button w-25 mt-2">Post</button>
             </form>
             : null}
-
 
     </div>)
 }
