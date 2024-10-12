@@ -5,9 +5,11 @@ export const router = express.Router()
 
 
 router.post('/createPost', (req, res) => {
+    const { id } = req.user
+    console.log(req.user, 'herer')
     const { postUUID, title, category, text, tags, username, password } = req.body
-    console.log(req.body)
-    db.run("INSERT INTO posts (postUUID, title, category, text, tags, username, password, dateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [postUUID, title, category, text, tags.toString(), username, password, new Date().toLocaleString()], function (err) {
+    db.run("INSERT INTO posts (postUUID, userUUID, title, category, text, tags, username, password, dateTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [postUUID, id, title, category, text, tags.toString(), username, password, new Date().toLocaleString()], function (err) {
+        console.log('hereer')
         if (err) {
             console.error("Error inserting post: ", err.message);
             res.json({ created: false })
@@ -21,7 +23,7 @@ router.post('/createPost', (req, res) => {
 
 
 router.get('/posts', (req, res) => {
-    console.log(req.user)
+ 
     db.all("SELECT * FROM posts", [], function (err, rows) {
         if (err) {
             console.error("Error inserting post: ", err.message);

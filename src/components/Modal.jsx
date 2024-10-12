@@ -78,15 +78,6 @@ export default function Modal() {
                 <div className="form-text">Comma separated tags</div>
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="formGroupExampleInput" className="form-label">Username</label>
-                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" className="form-control" required minLength={5} />
-                <div className="form-text">Write this down, to edit the post after creation.</div>
-
-                <label htmlFor="formGroupExampleInput" className="form-label mt-2">Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" placeholder="**********" required minLength={2} />
-              </div>
-
               <button onSubmit={validateForm} type="submit" className="btn btn-primary">Save</button>
             </form>
           </div>

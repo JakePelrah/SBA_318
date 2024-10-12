@@ -33,21 +33,34 @@ export default function PostProvider({ children }) {
     }
 
     function logout(e) {
-        console.log('here')
         e.preventDefault()
         fetch('/logout', { method: 'POST' })
             .then(res => res.json())
             .then(({ loggedIn }) => setLoggedIn(loggedIn))
     }
 
-    function auth(username, password) {
+    function auth(username, password, register) {
         fetch('/auth', {
             method: 'POST',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ username, password, register }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(checkLogin)
+        })
+        .then(res=>res.json())
+        .then(({ registered }) => {
+            console.log('here', registered)
+            if (!registered) {
+                alert('check username, password or register for an account')
+            }
+            else {
+                console.log('herer')
+                setLoggedIn(true)
+                getUsers()
+                getPosts()
+                checkLogin()
+            }
+        })
     }
 
     function createPost(postUUID, title, category, text, tags, username, password) {

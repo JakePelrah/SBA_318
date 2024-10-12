@@ -11,3 +11,7 @@
     margin: 0em !important;
     padding: 0em !important;
 }
+
+.form-control-sm{
+    width: 10em !important;
+}

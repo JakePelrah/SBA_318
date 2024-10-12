@@ -3,8 +3,7 @@ create table main.posts ( postUUID TEXT primary key, title    TEXT not null, cat
 create table main.users
 (
     userUUID TEXT
-        primary key,
-    username TEXT,
+    username TEXT primary key,
     password TEXT
 );
 

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import './sidebar.css'
 
 export default function Sidebar() {
-    const { users, tags } = usePost()
+    const { users, tags, loggedIn } = usePost()
 
     console.log(users)
     const renderedUsers = users.map(user => <li key={uuidv4()} className="list-group-item">
@@ -17,7 +17,7 @@ export default function Sidebar() {
         tags
     </li>)
 
-    
+
 
     return (<div className="sidebar">
 
@@ -36,7 +36,9 @@ export default function Sidebar() {
         </div>
 
         <div className='d-flex justify-content-center'>
-            <div data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn custom-button mt-5">Create Post</div>
+            {loggedIn ?
+                <div data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn custom-button mt-5">Create Post</div>
+                : null}
         </div>
     </div>)
 }
