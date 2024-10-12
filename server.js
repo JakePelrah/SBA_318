@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser'
 import passport from 'passport'
 
 
-
 import { router as userRouter } from './src/routes/user.js';
 import { router as postRouter } from './src/routes/post.js'
 import { router as authRouter } from './src/routes/auth.js'

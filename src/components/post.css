@@ -4,6 +4,13 @@
     margin-left: 20em;
     margin-right: 2em;
     border: none;
+
+    
+}
+
+.card-body {
+    height: 20em;
+    overflow: hidden;
 }
 
 .card-header {
@@ -21,27 +28,7 @@
     font-size: 1.5em;
 }
 
-.accordion-item {
-    background-color: var(--post-color) !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    width: 100%;
 
-}
-
-.accordion-button {
-    background-color: var(--post-color) !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.accordion-collapse {
-    max-height: 15em;
-    overflow-y: scroll;
-    scrollbar-color: var(--accent-color) var(--post-color);
-}
 
 .post-button,
 .post-button:hover {

@@ -47,32 +47,41 @@ export default function PostProvider({ children }) {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res=>res.json())
-        .then(({ registered }) => {
-            if (!registered) {
-                alert('Are you already registered? Check username and password')
-            }
-            else {
-                setLoggedIn(true)
-                getUsers()
-                getPosts()
-                checkLogin()
-            }
-        })
+            .then(res => res.json())
+            .then(({ registered }) => {
+                if (!registered) {
+                    alert('Are you already registered? Check username and password')
+                }
+                else {
+                    setLoggedIn(true)
+                    getUsers()
+                    getPosts()
+                    checkLogin()
+                }
+            })
     }
 
     function createPost(title, category, text, tags) {
         fetch('/createPost', {
             method: 'POST',
-            body: JSON.stringify({title, category, text, tags }),
+            body: JSON.stringify({ title, category, text, tags }),
             headers: { 'Content-Type': 'application/json' }
         }).then(() => getPosts())
+    }
+
+
+    function getPostById(id) {
+        return fetch('/getPostById', {
+            method: 'POST',
+            body: JSON.stringify({ id }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
     }
 
     return (
         <PostContext.Provider value={{
             posts, users, tags, createPost,
-            auth, loggedIn, logout
+            auth, loggedIn, logout, getPostById
         }}>
             {children}
         </PostContext.Provider>

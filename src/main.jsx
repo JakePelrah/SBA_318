@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './components/App.jsx'
+import PostView from './components/PostView.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -10,10 +11,13 @@ import PostProvider from './components/PostProvider.jsx';
 
 
 const router = createBrowserRouter([
-
   {
     path: '/',
     element: <App />
+  },
+  {
+    path:'/postView/:id',
+    element:<PostView/>
   }
 ]);
 

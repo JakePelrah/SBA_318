@@ -13,7 +13,8 @@ function App() {
     text={post.text}
     dateTime={post.dateTime}
     tags={post.tags}
-    username={post.username} />)
+    username={post.username}
+    postUUID={post.postUUID} />)
 
 
   return (
