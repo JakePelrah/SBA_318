@@ -4,7 +4,7 @@ import express from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
-import { logRequest } from './db.js';
+import { logRequest, logRouteTime } from './db.js';
 
 // import routers
 import { router as userRouter } from './src/routes/user.js';
@@ -31,10 +31,19 @@ app.use(passport.authenticate('session'));
 
 
 ///////////////////////////////// Custom Middleware /////////////////////////////////
+
+//request stats
 app.use((req, res, next) => {
   logRequest(req)
   next();
 });
+
+// route stats
+app.use((req, res, next) => {
+  logRouteTime(req, res)
+  next()
+})
+
 
 // routers
 app.use(authRouter)

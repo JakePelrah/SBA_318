@@ -32,6 +32,22 @@ export async function createUser(username, password) {
   catch (e) { return {} }
 }
 
+
+export async function logRouteTime(req, res) {
+  const start = Date.now()
+  res.on('finish', async () => {
+    const end = Date.now()
+    try {
+      await pool.query(`INSERT INTO route_stats
+        (method, url, ms )
+        VALUES ($1, $2, $3)`, [req.method, req.originalUrl, end - start])
+    }
+    catch (e) {
+      console.log('Error writing to log', e)
+    }
+  })
+}
+
 export async function logRequest(req) {
   const userAgent = req.get('User-Agent');
   const ip = req.ip;
