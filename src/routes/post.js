@@ -25,7 +25,6 @@ router.post('/getPostById', (req, res) => {
     catch (e) {
         res.json({})
     }
-
 })
 
 router.get('/posts', async (req, res) => {

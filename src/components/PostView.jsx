@@ -23,7 +23,6 @@ export default function PostView() {
     }
 
     const sortedComments = comments?.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
     const renderComments = sortedComments?.map(comment => (
         <Comment
             key={comment.comment_id} // Add a key for better performance
@@ -63,6 +62,5 @@ export default function PostView() {
                 <button onClick={onClick} className="btn post-button w-25 mt-2">Post</button>
             </form>
             : null}
-
     </div>)
 }

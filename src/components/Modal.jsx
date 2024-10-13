@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePost } from './PostProvider'
-
 import './modal.css'
 
 
@@ -11,12 +10,9 @@ export default function Modal() {
   const [tags, setTags] = useState('')
   const modalRef = useRef(null)
 
-
   useEffect(() => {
-
     modalRef.current = new bootstrap.Modal('.modal')
     modalRef.current._element.addEventListener('hidden.bs.modal', onClose)
-
     return () => {
       modalRef.current?._element.removeEventListener('hidden.bs.modal', onClose)
     }

@@ -38,12 +38,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// route stats
+// route time
 app.use((req, res, next) => {
   logRouteTime(req, res)
   next()
 })
-
 
 // routers
 app.use(authRouter)

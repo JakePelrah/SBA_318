@@ -69,7 +69,6 @@ export default function PostProvider({ children }) {
         }).then(() => getPosts())
     }
 
-
     function getPostById(id) {
         fetch('/getPostById', {
             method: 'POST',
@@ -104,7 +103,6 @@ export default function PostProvider({ children }) {
             .then(() => getCommentsByPostId(post_id))
     }
 
-
     function patchComment(comment_id, text){
         const { post_id } = currentPost
         fetch('/patchComment', {
@@ -124,7 +122,6 @@ export default function PostProvider({ children }) {
         }).then(res => res.json())
             .then(() => getCommentsByPostId(post_id))
     }
-
 
     return (
         <PostContext.Provider value={{
