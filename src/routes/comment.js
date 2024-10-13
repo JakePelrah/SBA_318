@@ -1,5 +1,5 @@
 import express from "express";
-import { getCommentsByPostId, insertComment } from "../../db.js";
+import { getCommentsByPostId, insertComment, patchComment, deleteComment } from "../../db.js";
 
 export const router = express.Router()
 
@@ -27,29 +27,24 @@ router.post('/createComment', (req, res) => {
 })
 
 
-// router.patch('/patchComment', (req, res) => {
-//     const { text, commentUUID } = req.body
-//     db.run("UPDATE comments SET text = ?, dateTime = ? WHERE commentUUID = ?", [text, new Date().toLocaleString(), commentUUID], function (err) {
-//         if (err) {
-//             console.error("Error updating comment: ", err.message);
-//             res.json({ updated: false });
-//         } else {
-//             console.log(`Comment updated with commentUUID: ${commentUUID}`);
-//             res.json({ updated: true });
-//         }
-//     });
-// })
+router.patch('/patchComment', (req, res) => {
+    const { text, comment_id } = req.body
+    try {
+        patchComment(text, comment_id)
+        res.json({ patched: true })
+    }
+    catch (err) {
+        res.json({ patched: false })
+    }
+})
 
-// router.delete('/deleteComment', (req, res) => {
-//     const { commentUUID } = req.body
-
-//     db.run("DELETE FROM comments WHERE commentUUID = ?", [commentUUID], function (err) {
-//         if (err) {
-//             console.error("Error deleting comment: ", err.message);
-//             res.json({ deleted: false });
-//         } else {
-//             console.log(`Comment deleted with commentUUID: ${commentUUID}`);
-//             res.json({ deleted: true });
-//         }
-//     });
-// })
+router.delete('/deleteComment', (req, res) => {
+    const { comment_id } = req.body
+    try {
+        deleteComment(comment_id)
+        res.json({ deleted: true })
+    }
+    catch (err) {
+        res.json({ deleted: false })
+    }
+})

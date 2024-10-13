@@ -25,9 +25,9 @@ export default function PostView() {
     const renderComments = comments?.map(comment => <Comment
         username={comment.username}
         text={comment.text}
-        dateTime={comment.dateTime}
-        userId={comment.userId}
-        commentId={comment.commentId} />)
+        timestamp={comment.timestamp}
+        userId={comment.user_id}
+        commentId={comment.comment_id} />)
 
     return (<div id='post-view' className="d-flex flex-column  m-5 p-5">
 

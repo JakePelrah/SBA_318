@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { usePost } from "./PostProvider"
 
-export default function Comment({ username, text, dateTime, userId, commentId }) {
+export default function Comment({ username, text, timestamp, userId, commentId }) {
     const { loggedIn, patchComment, deleteComment } = usePost()
     const [editing, setEditing] = useState(null)
     const commentDiv = useRef(null)
@@ -45,7 +45,7 @@ export default function Comment({ username, text, dateTime, userId, commentId })
     return (<div className="comment d-flex flex-column mb-3">
         <div className="comment-header d-flex justify-content-between">
             <div >{username}</div>
-            <div> {dateTime}</div>
+            <div> {timestamp}</div>
             <div>
                 {renderButton()}
                 {loggedIn?.id === userId ? <div onClick={remove} className="btn delete-button ms-2">DELETE</div> : null}

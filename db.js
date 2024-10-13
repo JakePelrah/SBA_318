@@ -154,3 +154,24 @@ export async function insertComment(userId, postId, text) {
     console.log('Error writing post', e)
   }
 }
+
+
+export async function patchComment(text, comment_id) {
+  try {
+    await pool.query(`UPDATE comments SET text = $1 WHERE comment_id = $2`, [text, comment_id])
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
+}
+
+
+
+export async function deleteComment(comment_id) {
+  try {
+    await pool.query(`DELETE FROM comments WHERE comment_id = $1`, [comment_id])
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
+}

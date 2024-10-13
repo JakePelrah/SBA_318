@@ -10,7 +10,7 @@ function App() {
   const renderPosts = posts.map(post => <Post key={post.post_id}
     title={post.title}
     text={post.text}
-    dateTime={post.dateTime}
+    timestamp={post.timestamp}
     tags={post.tags}
     postId={post.post_id} />)
 

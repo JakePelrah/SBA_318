@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import './post.css'
 
-export default function Post({ title, text, dateTime, tags, postId }) {
+export default function Post({ title, text, timestamp, tags, postId }) {
 
 
     const renderTags = tags?.split(',')?.map(tag => <div className="badge" >{tag}</div>)
@@ -20,7 +20,7 @@ export default function Post({ title, text, dateTime, tags, postId }) {
         </div>
         <div className="card-footer d-flex justify-content-between ">
 
-            <span className="d-none d-md-block">{dateTime}</span>
+            <span className="d-none d-md-block">{timestamp}</span>
 
             <div className="d-flex justify-content-center align-items-center d-none d-md-block">
                 {renderTags}

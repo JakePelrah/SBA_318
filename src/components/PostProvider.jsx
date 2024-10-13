@@ -99,21 +99,21 @@ export default function PostProvider({ children }) {
     }
 
 
-    function patchComment(commentId, text){
+    function patchComment(comment_id, text){
         const { post_id } = currentPost
         fetch('/patchComment', {
             method: 'PATCH',
-            body: JSON.stringify({ text, commentId }),
+            body: JSON.stringify({ text, comment_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
             .then(() => getCommentsByPostId(post_id))
     }
 
-    function deleteComment(commentId){
+    function deleteComment(comment_id){
         const { post_id } = currentPost
         fetch('/deleteComment', {
             method: 'DELETE',
-            body: JSON.stringify({ commentId }),
+            body: JSON.stringify({ comment_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
             .then(() => getCommentsByPostId(post_id))
