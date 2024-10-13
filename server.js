@@ -15,7 +15,7 @@ import { router as commentRouter } from './src/routes/comment.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express()
-const port = 3000
+const port = process.env.PORT || 5001
 
 app.use(cookieParser());
 app.use(express.json()); // Parse JSON bodies
