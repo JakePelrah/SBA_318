@@ -9,11 +9,9 @@ router.post('/createPost', (req, res) => {
     const { title, category, text, tags } = req.body
     try {
         insertPost(id, title, category, text, tags)
-        console.log(`Post created with post_id: ${id}`);
         res.json({ created: true })
     }
     catch (err) {
-        console.error("Error inserting post: ", err.message);
         res.json({ created: false })
     }
 })

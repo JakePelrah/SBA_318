@@ -111,7 +111,6 @@ JOIN
   }
 }
 
-
 export async function getUsers(params) {
   try {
     const res = await pool.query("SELECT user_id, username FROM users", [])
@@ -119,5 +118,39 @@ export async function getUsers(params) {
   }
   catch (e) {
     return []
+  }
+}
+
+
+export async function getCommentsByPostId(id) {
+  try {
+    const res = await pool.query(`SELECT 
+    c.comment_id,
+    c.text,
+    c.timestamp,
+    c.user_id,
+    u.username
+FROM 
+    comments c
+JOIN 
+    users u ON u.user_id = c.user_id
+WHERE 
+    c.post_id = $1;`, [id])
+    return res.rows
+  }
+  catch (e) {
+    console.log(e)
+    return []
+  }
+}
+
+export async function insertComment(userId, postId, text) {
+  try {
+    await pool.query(`INSERT INTO comments 
+      (user_id, comment_id, post_id, text, timestamp)
+      VALUES ($1, $2, $3, $4, $5)`, [userId, uuidv4(), postId, text, new Date().toLocaleString()])
+  }
+  catch (e) {
+    console.log('Error writing post', e)
   }
 }

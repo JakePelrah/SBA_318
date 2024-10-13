@@ -31,7 +31,6 @@ export default function PostProvider({ children }) {
     function checkLogin() {
         fetch('/checkLogin')
             .then(res => res.json())
-            .then(data=>{console.log(data); return data})
             .then(user => setLoggedIn(user))
     }
 
@@ -52,7 +51,6 @@ export default function PostProvider({ children }) {
         })
             .then(res => res.json())
             .then(user => {
-                console.log(user)
                 if (!user.id) {
                     alert('Are you already registered? Check username and password')
                 }
@@ -81,44 +79,44 @@ export default function PostProvider({ children }) {
             .then(setCurrentPost)
     }
 
-    function getCommentsByPostId(id) {
+    function getCommentsByPostId(post_id) {
         fetch('/getCommentsByPostId', {
             method: 'POST',
-            body: JSON.stringify({ id }),
+            body: JSON.stringify({ post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
             .then(setComments)
     }
 
     function createComment(text) {
-        const { postId } = currentPost
+        const { post_id } = currentPost
         fetch('/createComment', {
             method: 'POST',
-            body: JSON.stringify({ text, postId }),
+            body: JSON.stringify({ text, post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postId))
+            .then(() => getCommentsByPostId(post_id))
     }
 
 
     function patchComment(commentId, text){
-        const { postId } = currentPost
+        const { post_id } = currentPost
         fetch('/patchComment', {
             method: 'PATCH',
             body: JSON.stringify({ text, commentId }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postId))
+            .then(() => getCommentsByPostId(post_id))
     }
 
     function deleteComment(commentId){
-        const { postId } = currentPost
+        const { post_id } = currentPost
         fetch('/deleteComment', {
             method: 'DELETE',
             body: JSON.stringify({ commentId }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postId))
+            .then(() => getCommentsByPostId(post_id))
     }
 
 
