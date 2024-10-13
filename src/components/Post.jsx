@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import './post.css'
 
-export default function Post({ title, text, dateTime, tags, postUUID }) {
+export default function Post({ title, text, dateTime, tags, postId }) {
 
 
     const renderTags = tags?.split(',')?.map(tag => <div className="badge" >{tag}</div>)
@@ -9,7 +9,7 @@ export default function Post({ title, text, dateTime, tags, postUUID }) {
     return (<div className="card my-5">
         <div className="card-header d-flex align-items-center justify-content-between">
             <span className="d-none d-sm-block"> {title}</span>
-            <Link className="btn custom-button" to={`postView/${postUUID}`}>View More</Link>
+            <Link className="btn custom-button" to={`postView/${postId}`}>View More</Link>
         </div>
 
         <div className="card-body">
@@ -20,7 +20,6 @@ export default function Post({ title, text, dateTime, tags, postUUID }) {
         </div>
         <div className="card-footer d-flex justify-content-between ">
 
-        
             <span className="d-none d-md-block">{dateTime}</span>
 
             <div className="d-flex justify-content-center align-items-center d-none d-md-block">

@@ -1,76 +1,41 @@
 import express from "express";
-import { v4 as uuidv4 } from 'uuid'
+import { insertPost, getPostById, getAllPosts } from "../../db.js";
 
 export const router = express.Router()
 
 
-// router.post('/createPost', (req, res) => {
-//     const { id } = req.user
-//     const { title, category, text, tags } = req.body
-//     db.run("INSERT INTO posts (postUUID, userUUID, title, category, text, tags, dateTime) VALUES (?, ?, ?, ?, ?, ?, ?)", [uuidv4(), id, title, category, text, tags.toString(), new Date().toLocaleString()], function (err) {
-//         if (err) {
-//             console.error("Error inserting post: ", err.message);
-//             res.json({ created: false })
-//         } else {
-//             console.log(`Post created with postUUID: ${id}`);
-//             res.json({ created: true })
-//         }
-//     });
-// })
+router.post('/createPost', (req, res) => {
+    const { id } = req.user
+    const { title, category, text, tags } = req.body
+    try {
+        insertPost(id, title, category, text, tags)
+        console.log(`Post created with post_id: ${id}`);
+        res.json({ created: true })
+    }
+    catch (err) {
+        console.error("Error inserting post: ", err.message);
+        res.json({ created: false })
+    }
+})
 
-// router.post('/getPostById', (req, res) => {
-//     const { id } = req.body
-//     db.all(`SELECT 
-//     u.userUUID,
-//     u.username,
-//     p.postUUID,
-//     p.title,
-//     p.category,
-//     p.text,
-//     p.tags,
-//     p.dateTime
-// FROM 
-//     main.users AS u
-// JOIN 
-//     main.posts AS p ON u.userUUID = p.userUUID
-// WHERE 
-//     p.postUUID = ?;` , [id], function (err, row) {
-//         if (err) {
-//             res.json({})
-//         } else {
-//             res.json(row[0])
-//         }
-//     });
-// })
+router.post('/getPostById', async (req, res) => {
+    const { id } = req.body
+    const post = await getPostById(id)
+    if(post.post_id){
+        res.json(post)
+    }
+    else{
+        res.json({})
+    }
+})
 
+router.get('/posts', async (req, res) => {
+    const posts = await getAllPosts()
+    if (posts.length > 0) {
+        res.json(posts)
+    }
+    else {
+        res.json([])
+    }
+})
 
-
-
-// router.get('/posts', (req, res) => {
-
-//     db.all(`SELECT 
-//     u.userUUID,
-//     u.username,
-//     p.postUUID,
-//     p.title,
-//     p.category,
-//     p.text,
-//     p.tags,
-//     p.dateTime
-// FROM 
-//     main.users AS u
-// JOIN 
-//     main.posts AS p ON u.userUUID = p.userUUID;`, [], function (err, rows) {
-//         if (err) {
-//             console.error("Error inserting post: ", err.message);
-//             res.json({})
-//         } else {
-//             res.json(rows)
-//         }
-//     });
-// })
-
-// router.get('/posts/:username', (req, res) => {
-
-
-// })

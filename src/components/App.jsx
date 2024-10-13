@@ -7,12 +7,12 @@ import Modal from './Modal'
 function App() {
   const { posts } = usePost()
 
-  const renderPosts = posts.map(post => <Post key={post.postUUID}
+  const renderPosts = posts.map(post => <Post key={post.post_id}
     title={post.title}
     text={post.text}
     dateTime={post.dateTime}
     tags={post.tags}
-    postUUID={post.postUUID} />)
+    postId={post.post_id} />)
 
 
   return (

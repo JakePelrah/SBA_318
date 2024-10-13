@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { usePost } from "./PostProvider"
 
-export default function Comment({ username, text, dateTime, userUUID, commentUUID }) {
+export default function Comment({ username, text, dateTime, userId, commentId }) {
     const { loggedIn, patchComment, deleteComment } = usePost()
     const [editing, setEditing] = useState(null)
     const commentDiv = useRef(null)
@@ -15,7 +15,7 @@ export default function Comment({ username, text, dateTime, userUUID, commentUUI
     function onSave() {
         const newText = commentDiv.current.innerText
         if (newText !== '') {
-            patchComment(commentUUID, commentDiv.current.innerText)
+            patchComment(commentId, commentDiv.current.innerText)
             setEditing(false)
         }
         else {
@@ -25,18 +25,18 @@ export default function Comment({ username, text, dateTime, userUUID, commentUUI
     }
 
     function remove() {
-        deleteComment(commentUUID)
+        deleteComment(commentId)
     }
 
     function renderButton() {
         if (!loggedIn?.id) {
             return null
         }
-        else if (loggedIn?.id === userUUID && editing) {
+        else if (loggedIn?.id === userId && editing) {
 
             return <div onClick={onSave} className="btn comment-button">Save</div>
         }
-        else if (loggedIn?.id === userUUID && !editing) {
+        else if (loggedIn?.id === userId && !editing) {
 
             return <div onClick={() => setEditing(!editing)} className="btn comment-button">Edit</div>
         }
@@ -48,7 +48,7 @@ export default function Comment({ username, text, dateTime, userUUID, commentUUI
             <div> {dateTime}</div>
             <div>
                 {renderButton()}
-                {loggedIn?.id === userUUID ? <div onClick={remove} className="btn delete-button ms-2">DELETE</div> : null}
+                {loggedIn?.id === userId ? <div onClick={remove} className="btn delete-button ms-2">DELETE</div> : null}
             </div>
         </div>
         <div ref={commentDiv} className="mt-2" contentEditable={editing}> {text}</div>

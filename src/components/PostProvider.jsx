@@ -91,34 +91,34 @@ export default function PostProvider({ children }) {
     }
 
     function createComment(text) {
-        const { postUUID } = currentPost
+        const { postId } = currentPost
         fetch('/createComment', {
             method: 'POST',
-            body: JSON.stringify({ text, postUUID }),
+            body: JSON.stringify({ text, postId }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postUUID))
+            .then(() => getCommentsByPostId(postId))
     }
 
 
-    function patchComment(commentUUID, text){
-        const { postUUID } = currentPost
+    function patchComment(commentId, text){
+        const { postId } = currentPost
         fetch('/patchComment', {
             method: 'PATCH',
-            body: JSON.stringify({ text, commentUUID }),
+            body: JSON.stringify({ text, commentId }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postUUID))
+            .then(() => getCommentsByPostId(postId))
     }
 
-    function deleteComment(commentUUID){
-        const { postUUID } = currentPost
+    function deleteComment(commentId){
+        const { postId } = currentPost
         fetch('/deleteComment', {
             method: 'DELETE',
-            body: JSON.stringify({ commentUUID }),
+            body: JSON.stringify({ commentId }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(() => getCommentsByPostId(postUUID))
+            .then(() => getCommentsByPostId(postId))
     }
 
 

@@ -3,7 +3,6 @@ import dotEnv from "dotenv";
 import { v4 as uuidv4 } from 'uuid'
 dotEnv.config();
 
-
 const { Pool } = pg;
 
 const pool = new Pool({
@@ -52,6 +51,73 @@ export async function logRequest(req) {
   catch (e) {
     console.log('Error writing to log', e)
   }
+}
 
 
+export async function insertPost(userId, title, text, tags) {
+  try {
+    await pool.query(`INSERT INTO posts 
+      (post_id, user_id, title, text, tags, timestamp)
+      VALUES ($1, $2, $3, $4, $5, $6)`, [uuidv4(), userId, title, text, tags, new Date().toLocaleString()])
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
+}
+
+export async function getPostById(postId) {
+  try {
+    const res = await pool.query(` SELECT 
+            u.user_id,
+            u.username,
+            p.post_id,
+            p.title,
+            p.text,
+            p.tags,
+            p.timestamp
+        FROM 
+            users AS u
+        JOIN 
+            posts AS p ON u.user_id = p.user_id
+        WHERE 
+            p.post_id = $1;`, [postId])
+    return res.rows[0]
+  }
+  catch (e) {
+    console.log(e)
+    return {}
+  }
+}
+
+export async function getAllPosts() {
+  try {
+    const res = await pool.query(`SELECT 
+    u.user_id,
+    u.username,
+    p.post_id,
+    p.title,
+    p.text,
+    p.tags,
+    p.timestamp
+FROM 
+    users AS u
+JOIN 
+    posts AS p ON u.user_id = p.user_id;`, [])
+    return res.rows
+  }
+  catch (e) {
+    console.log(e)
+    return []
+  }
+}
+
+
+export async function getUsers(params) {
+  try {
+    const res = await pool.query("SELECT user_id, username FROM users", [])
+    return res.rows
+  }
+  catch (e) {
+    return []
+  }
 }

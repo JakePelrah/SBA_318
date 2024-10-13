@@ -26,8 +26,8 @@ export default function PostView() {
         username={comment.username}
         text={comment.text}
         dateTime={comment.dateTime}
-        userUUID={comment.userUUID}
-        commentUUID={comment.commentUUID} />)
+        userId={comment.userId}
+        commentId={comment.commentId} />)
 
     return (<div id='post-view' className="d-flex flex-column  m-5 p-5">
 
@@ -40,7 +40,7 @@ export default function PostView() {
                 <img className="me-2" src="../../icons/person-square.svg">
                 </img>{currentPost?.username}
             </div>
-            <div>Published:{currentPost?.dateTime}</div>
+            <div>Published:{currentPost?.timestamp}</div>
         </div>
 
         <p className="mt-5">{currentPost?.text}</p>

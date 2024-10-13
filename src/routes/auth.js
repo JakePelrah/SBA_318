@@ -60,8 +60,6 @@ router.post('/auth', (req, res, next) => {
   })(req, res, next)
 })
 
-
-
 router.get('/checkLogin', (req, res) => {
   if (req.user?.id) {
     res.json(req.user)

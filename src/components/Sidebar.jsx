@@ -5,10 +5,10 @@ import './sidebar.css'
 export default function Sidebar() {
     const { users, loggedIn } = usePost()
 
-    const renderedUsers = users.map(user => <li key={uuidv4()} className="list-group-item">
+    const renderedUsers = users.map(user => <li key={user.user_id} className="list-group-item">
         <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
         {user.username}
-        <div className='uuid'>({user.userUUID})</div>
+        <div className='uuid'>({user.user_id})</div>
     </li>)
 
 
@@ -20,13 +20,6 @@ export default function Sidebar() {
             <div className='sidebar-title ms-3 mt-5'>Users</div>
             <ul className="list-group">
                 {renderedUsers}
-            </ul>
-        </div>
-
-        <div>
-            <div className='sidebar-title ms-3 mt-3'>Tags</div>
-            <ul className="list-group">
-              
             </ul>
         </div>
 
