@@ -85,6 +85,9 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
+            .then(data=>{
+                console.log(data); return data
+            })
             .then(setComments)
     }
 
@@ -95,6 +98,9 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ text, post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
+            .then(data=>{console.log(data, post_id);
+                return data
+            })
             .then(() => getCommentsByPostId(post_id))
     }
 
