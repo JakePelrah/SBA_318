@@ -7,7 +7,8 @@ import Modal from './Modal'
 function App() {
   const { posts } = usePost()
 
-  const renderPosts = posts.map(post => <Post key={post.post_id}
+  const sortedPosts = posts?.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  const renderPosts = sortedPosts.map(post => <Post key={post.post_id}
     title={post.title}
     text={post.text}
     timestamp={post.timestamp}

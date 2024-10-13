@@ -3,8 +3,6 @@ import './post.css'
 
 export default function Post({ title, text, timestamp, tags, postId }) {
 
-    console.log(tags)
-
     const renderTags = tags?.map(tag => <div className="badge">{tag}</div>)
 
     return (<div className="card my-5">
