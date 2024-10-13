@@ -8,7 +8,6 @@ export default function Modal() {
   const { createPost } = usePost()
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
-  const [category, setCategory] = useState('')
   const [tags, setTags] = useState('')
   const modalRef = useRef(null)
 
@@ -26,12 +25,11 @@ export default function Modal() {
 
   function validateForm(e) {
     e.preventDefault()
-    createPost(title, category, text, tags)
+    createPost(title, text, tags)
     modalRef.current.hide()
   }
 
   function onClose() {
-    setCategory('')
     setTags('')
     setText('')
     setTitle('')
@@ -53,11 +51,7 @@ export default function Modal() {
                 <label htmlFor="exampleFormControlTextarea1" className="form-label">Post Content</label>
                 <textarea value={text} onChange={(e) => setText(e.target.value)} className="form-control" rows="3" placeholder='The first step in creating an Express server is....' required minLength={2}></textarea>
               </div>
-              <div className="mb-3">
-                <label htmlFor="formGroupExampleInput" className="form-label">Post Category</label>
-                <input value={category} onChange={(e) => setCategory(e.target.value)} type="text" className="form-control" placeholder="JavaScript" required minLength={2} />
-              </div>
-
+        
               <div className="mb-3">
                 <label htmlFor="formGroupExampleInput" className="form-label">Post Tags</label>
                 <input value={tags} onChange={(e) => setTags(e.target.value.split(','))} type="text" className="form-control" placeholder="backend, javascript, nodejs" required minLength={2} />

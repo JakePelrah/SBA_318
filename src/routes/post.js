@@ -6,33 +6,34 @@ export const router = express.Router()
 
 router.post('/createPost', (req, res) => {
     const { id } = req.user
-    const { title, category, text, tags } = req.body
+    const { title, text, tags } = req.body
     try {
-        insertPost(id, title, category, text, tags)
-        res.json({ created: true })
+        insertPost(id, title, text, tags)
+            .then(() => res.json({ created: true }))
     }
     catch (err) {
         res.json({ created: false })
     }
 })
 
-router.post('/getPostById', async (req, res) => {
+router.post('/getPostById', (req, res) => {
     const { id } = req.body
-    const post = await getPostById(id)
-    if(post.post_id){
-        res.json(post)
+    try {
+        getPostById(id)
+            .then(post => res.json(post))
     }
-    else{
+    catch (e) {
         res.json({})
     }
+
 })
 
 router.get('/posts', async (req, res) => {
-    const posts = await getAllPosts()
-    if (posts.length > 0) {
-        res.json(posts)
+    try {
+        getAllPosts()
+            .then(post => res.json(post))
     }
-    else {
+    catch (e) {
         res.json([])
     }
 })
