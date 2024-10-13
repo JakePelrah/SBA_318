@@ -20,7 +20,7 @@ export default function Post({ title, text, timestamp, tags, postId }) {
         </div>
         <div className="card-footer d-flex justify-content-between ">
 
-            <span className="d-none d-md-block">{timestamp}</span>
+            <span className="d-none d-md-block">{new Date(timestamp).toLocaleString()}</span>
 
             <div className="d-flex justify-content-center align-items-center d-none d-md-block">
                 {renderTags}

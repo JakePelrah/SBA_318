@@ -40,7 +40,7 @@ export default function PostView() {
                 <img className="me-2" src="../../icons/person-square.svg">
                 </img>{currentPost?.username}
             </div>
-            <div>Published:{currentPost?.timestamp}</div>
+            <div>Published:{new Date(currentPost?.timestamp).toLocaleString()}</div>
         </div>
 
         <p className="mt-5">{currentPost?.text}</p>
