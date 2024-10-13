@@ -25,7 +25,6 @@ function App() {
         {renderPosts}
       </div>
     </>
-
   )
 }
 

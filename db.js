@@ -12,7 +12,6 @@ const pool = new Pool({
   },
 });
 
-
 export async function findUser(username, password) {
   try {
     let { rows } = await pool.query(
@@ -52,7 +51,6 @@ export async function logRequest(req) {
     console.log('Error writing to log', e)
   }
 }
-
 
 export async function insertPost(userId, title, text, tags) {
   try {

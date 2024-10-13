@@ -5,7 +5,6 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import { logRequest } from './db.js';
-import uaParser from 'ua-parser-js'
 
 // import routers
 import { router as userRouter } from './src/routes/user.js';
@@ -37,19 +36,15 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // routers
 app.use(authRouter)
 app.use(userRouter)
 app.use(postRouter)
 app.use(commentRouter)
 
-
-
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html')); // Send index.html for client-side routing
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

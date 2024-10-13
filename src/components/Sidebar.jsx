@@ -11,11 +11,7 @@ export default function Sidebar() {
         <div className='uuid'>({user.user_id})</div>
     </li>)
 
-
-
-
     return (<div className="sidebar">
-
         <div>
             <div className='sidebar-title ms-3 mt-5'>Users</div>
             <ul className="list-group">
