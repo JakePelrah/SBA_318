@@ -1,5 +1,5 @@
 import express from "express";
-import { insertPost, getPostById, getAllPosts } from "../../db.js";
+import { insertPost, getPostById, getAllPosts, deletePost } from "../../db.js";
 
 export const router = express.Router()
 
@@ -31,6 +31,17 @@ router.get('/posts', async (req, res) => {
     try {
         getAllPosts()
             .then(post => res.json(post))
+    }
+    catch (e) {
+        res.json([])
+    }
+})
+
+router.delete('/deletePost', async (req, res) => {
+    const { post_id } = req.body
+    try {
+        deletePost(post_id)
+            .then(() => res.json({ deleted: true }))
     }
     catch (e) {
         res.json([])

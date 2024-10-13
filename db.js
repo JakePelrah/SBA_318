@@ -185,3 +185,13 @@ export async function deleteComment(comment_id) {
     console.log('Error writing post', e)
   }
 }
+
+export async function deletePost(post_id) {
+  console.log(post_id)
+  try {
+    await pool.query(`DELETE FROM posts WHERE post_id = $1`, [post_id])
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
+}

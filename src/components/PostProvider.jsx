@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+
 const PostContext = createContext()
 export const usePost = () => useContext(PostContext)
 
@@ -86,7 +87,7 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(data=>{
+            .then(data => {
                 console.log(data); return data
             })
             .then(setComments)
@@ -99,13 +100,14 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ text, post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(data=>{console.log(data, post_id);
+            .then(data => {
+                console.log(data, post_id);
                 return data
             })
             .then(() => getCommentsByPostId(post_id))
     }
 
-    function patchComment(comment_id, text){
+    function patchComment(comment_id, text) {
         const { post_id } = currentPost
         fetch('/patchComment', {
             method: 'PATCH',
@@ -115,7 +117,7 @@ export default function PostProvider({ children }) {
             .then(() => getCommentsByPostId(post_id))
     }
 
-    function deleteComment(comment_id){
+    function deleteComment(comment_id) {
         const { post_id } = currentPost
         fetch('/deleteComment', {
             method: 'DELETE',
@@ -125,11 +127,20 @@ export default function PostProvider({ children }) {
             .then(() => getCommentsByPostId(post_id))
     }
 
+    function deletePost(post_id) {
+        fetch('/deletePost', {
+            method: 'DELETE',
+            body: JSON.stringify({ post_id }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+            .then(({ deleted }) => deleted ? window.location.href='/' : null)
+    }
+
     return (
         <PostContext.Provider value={{
             auth, loggedIn, logout,
             posts, users, comments, currentPost,
-            createPost, 
+            createPost, deletePost,
             getPostById, getCommentsByPostId,
             createComment, patchComment, deleteComment
         }}>

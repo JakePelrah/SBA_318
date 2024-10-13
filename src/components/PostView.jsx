@@ -5,10 +5,11 @@ import Comment from "./Comment"
 import './post.css'
 
 export default function PostView() {
-    const { getPostById, getCommentsByPostId, createComment, loggedIn, comments, currentPost } = usePost()
+    const { getPostById, getCommentsByPostId, createComment, loggedIn, comments, currentPost, deletePost } = usePost()
     const { id } = useParams()
     const [newComment, setNewComment] = useState('')
 
+    console.log(currentPost)
     useEffect(() => {
         getPostById(id)
         getCommentsByPostId(id)
@@ -20,6 +21,10 @@ export default function PostView() {
             createComment(newComment)
             setNewComment('')
         }
+    }
+
+    function remove() {
+        deletePost(currentPost.post_id)
     }
 
     const sortedComments = comments?.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
@@ -36,7 +41,12 @@ export default function PostView() {
 
     return (<div id='post-view' className="d-flex flex-column  m-5 p-5">
 
-        <Link className="mb-5 link" to='/'>Home</Link>
+        <div className="d-flex justify-content-between">
+            <Link className="mb-5 link" to='/'>Home</Link>
+            {loggedIn?.id === currentPost.user_id ? <div onClick={remove} className="btn delete-button">DELETE</div> : null}
+
+        </div>
+
 
         <h1 className="post-title text-center">{currentPost?.title}</h1>
 
