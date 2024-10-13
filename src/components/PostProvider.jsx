@@ -56,6 +56,8 @@ export default function PostProvider({ children }) {
                 }
                 else {
                     setLoggedIn(user)
+                    getUsers()
+                    getPosts()
                     checkLogin()
                 }
             })
