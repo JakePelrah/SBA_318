@@ -3,8 +3,9 @@ import './post.css'
 
 export default function Post({ title, text, timestamp, tags, postId }) {
 
+    console.log(tags)
 
-    const renderTags = tags?.split(',')?.map(tag => <div className="badge" >{tag}</div>)
+    const renderTags = tags?.map(tag => <div className="badge">{tag}</div>)
 
     return (<div className="card my-5">
         <div className="card-header d-flex align-items-center justify-content-between">

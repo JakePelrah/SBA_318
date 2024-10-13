@@ -25,6 +25,7 @@ export default function Modal() {
 
   function validateForm(e) {
     e.preventDefault()
+    console.log(tags)
     createPost(title, text, tags)
     modalRef.current.hide()
   }

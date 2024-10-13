@@ -68,19 +68,19 @@ export async function insertPost(userId, title, text, tags) {
 export async function getPostById(postId) {
   try {
     const res = await pool.query(` SELECT 
-            u.user_id,
-            u.username,
-            p.post_id,
-            p.title,
-            p.text,
-            p.tags,
-            p.timestamp
-        FROM 
-            users AS u
-        JOIN 
-            posts AS p ON u.user_id = p.user_id
-        WHERE 
-            p.post_id = $1;`, [postId])
+    u.user_id,
+    u.username,
+    p.post_id,
+    p.title,
+    p.text,
+    p.tags,
+    p.timestamp
+FROM 
+    users AS u
+JOIN 
+    posts AS p ON u.user_id = p.user_id
+WHERE 
+    p.post_id = $1`, [postId])
     return res.rows[0]
   }
   catch (e) {
@@ -121,7 +121,6 @@ export async function getUsers(params) {
   }
 }
 
-
 export async function getCommentsByPostId(id) {
   try {
     const res = await pool.query(`SELECT 
@@ -155,7 +154,6 @@ export async function insertComment(userId, postId, text) {
   }
 }
 
-
 export async function patchComment(text, comment_id) {
   try {
     await pool.query(`UPDATE comments SET text = $1 WHERE comment_id = $2`, [text, comment_id])
@@ -164,8 +162,6 @@ export async function patchComment(text, comment_id) {
     console.log('Error writing post', e)
   }
 }
-
-
 
 export async function deleteComment(comment_id) {
   try {
