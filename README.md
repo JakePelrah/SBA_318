@@ -16,3 +16,8 @@ Data is being hosted on Heroku using PostgreSQL.
 To run locally, check submission comments for DATABASE_URL
 
 
+
+TODO:
+* Fix layout shifts and artifacts (delete button)
+* Improve UI
+
