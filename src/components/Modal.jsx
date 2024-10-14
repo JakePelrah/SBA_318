@@ -21,9 +21,13 @@ export default function Modal() {
 
   function validateForm(e) {
     e.preventDefault()
-    console.log(tags)
-    createPost(title, text, tags)
-    modalRef.current.hide()
+    if(title!=='' && text !=='' && tags !==''){
+      createPost(title, text, tags)
+      modalRef.current.hide()
+    }
+    else{
+      alert('Missing information.')
+    }
   }
 
   function onClose() {

@@ -1,13 +1,12 @@
 :root {
-  --accent-color: #b7b7b7;
-  --post-color: #474747;
+  --accent-color: #282828;
+  --post-color: #9c9c9c;
   --bg-color: #595959;
-  --text-color:#000000;
+  --text-color:#2283a9;
 }
 
 body {
   background-color: var(--bg-color);
-  
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 

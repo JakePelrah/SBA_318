@@ -6,7 +6,7 @@
 }
 
 .navbar-brand{
-    color: rgb(0, 0, 0);
+    color: var(--text-color);
     font-weight: bold;
     font-size: 2em;
     margin: 0em !important;

@@ -6,7 +6,7 @@ export default function Sidebar() {
     const { users, tags, loggedIn, setCurrentTag, setCurrentUser, submitSearch } = usePost()
     const [searchTerm, setSearchTerm] = useState('')
 
- 
+
 
     const renderedUsers = users.map(user => <option key={user.user_id} value={user.username}>{user.username}</option>)
     const renderedTags = tags?.map(tag => <option key={tag.tag} value={tag.tag}>{tag.tag}</option>)
@@ -30,8 +30,8 @@ export default function Sidebar() {
         </div>
 
         <form class="d-flex input-group mt-4 p-2" role="search">
-            <input value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} class="form-control" type="search" placeholder="Search" aria-label="Search" />
-            <button onClick={(e)=>submitSearch(e, searchTerm)} class="btn custom-button">Search</button>
+            <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} class="form-control" type="search" placeholder="Search" aria-label="Search" />
+            <button onClick={(e) => submitSearch(e, searchTerm)} class="btn custom-button">Search</button>
         </form>
 
         <div className='d-flex justify-content-center'>

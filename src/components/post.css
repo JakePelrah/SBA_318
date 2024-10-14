@@ -13,7 +13,7 @@
 
 .card-header {
     background-color: var(--accent-color);
-    color: #000000;
+    color: var(--text-color);
     font-weight: bold;
 }
 
@@ -36,7 +36,7 @@
 .badge {
     background-color: var(--accent-color) !important;
     margin: .25em;
-    color: black;
+    color: white;
 }
 
 .post-title {
@@ -49,7 +49,8 @@
     border-radius: .25em;
 }
 
-.link, .link:hover {
+.link,
+.link:hover {
     font-weight: bold;
     color: rgb(255, 254, 254);
 }
@@ -61,23 +62,26 @@ hr {
     background-color: #000000 !important;
 }
 
-.comment{
+.comment {
     border: 1px solid rgb(165, 165, 165);
     border-radius: .15em;
     padding: 1em;
 }
-.comment-header{
+
+.comment-header {
     background-color: var(--accent-color);
     color: white;
     padding: .25em;
     border-radius: .15em;
 }
 
-.comment-button, .comment-button:hover{
+.comment-button,
+.comment-button:hover {
     background-color: var(--post-color);
     color: white;
 }
 
-.delete-button, .delete-button:hover{
+.delete-button,
+.delete-button:hover {
     background-color: red;
 }
