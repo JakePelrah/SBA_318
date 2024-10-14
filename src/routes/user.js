@@ -1,5 +1,5 @@
 import express from "express";
-import { getUsers } from "../../db.js";
+import { getUsers, getTags } from "../../db.js";
 
 export const router = express.Router()
 
@@ -12,4 +12,16 @@ router.get('/users', async (req, res) => {
     else {
         res.json([])
     }
+})
+
+
+router.get('/tags', async(req, res)=>{
+    const tags = await getTags()
+    if (tags.length > 0) {
+        res.json(tags)
+    }
+    else {
+        res.json([])
+    }
+
 })

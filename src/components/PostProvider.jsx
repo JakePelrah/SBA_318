@@ -8,12 +8,14 @@ export default function PostProvider({ children }) {
     const [posts, setPosts] = useState([])
     const [currentPost, setCurrentPost] = useState({})
     const [users, setUsers] = useState([])
+    const [tags, setTags] = useState([])
     const [comments, setComments] = useState([])
     const [loggedIn, setLoggedIn] = useState({})
 
     useEffect(() => {
         getPosts()
         getUsers()
+        getTags()
         checkLogin()
     }, [])
 
@@ -28,6 +30,13 @@ export default function PostProvider({ children }) {
             .then(res => res.json())
             .then(setUsers)
     }
+
+    function getTags() {
+        fetch('/tags')
+            .then(res => res.json())
+            .then(setTags)
+    }
+
 
     function checkLogin() {
         fetch('/checkLogin')
@@ -69,7 +78,10 @@ export default function PostProvider({ children }) {
             method: 'POST',
             body: JSON.stringify({ title, text, tags }),
             headers: { 'Content-Type': 'application/json' }
-        }).then(() => getPosts())
+        }).then(() => {
+            getPosts()
+            getTags()
+        })
     }
 
     function getPostById(id) {
@@ -87,9 +99,6 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(data => {
-                console.log(data); return data
-            })
             .then(setComments)
     }
 
@@ -100,10 +109,6 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ text, post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(data => {
-                console.log(data, post_id);
-                return data
-            })
             .then(() => getCommentsByPostId(post_id))
     }
 
@@ -133,13 +138,13 @@ export default function PostProvider({ children }) {
             body: JSON.stringify({ post_id }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res => res.json())
-            .then(({ deleted }) => deleted ? window.location.href='/' : null)
+            .then(({ deleted }) => deleted ? window.location.href = '/' : null)
     }
 
     return (
         <PostContext.Provider value={{
             auth, loggedIn, logout,
-            posts, users, comments, currentPost,
+            posts, users, tags, comments, currentPost,
             createPost, deletePost,
             getPostById, getCommentsByPostId,
             createComment, patchComment, deleteComment

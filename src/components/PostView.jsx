@@ -40,15 +40,12 @@ export default function PostView() {
     ));
 
     return (<div id='post-view' className="d-flex flex-column  m-5 p-5">
-
         <div className="d-flex justify-content-between">
-            <Link className="mb-5 link" to='/'>Home</Link>
+            <Link className="link" to='/'>Home</Link>
             {loggedIn?.id === currentPost.user_id ? <div onClick={remove} className="btn delete-button">DELETE</div> : null}
-
         </div>
 
-
-        <h1 className="post-title text-center">{currentPost?.title}</h1>
+        <h1 className="post-title text-center mt-5">{currentPost?.title}</h1>
 
         <div className="d-flex flex-column mt-5 justify-content-start">
             <div className="d-flex align-items-center fw-bold" >

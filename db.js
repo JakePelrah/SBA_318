@@ -195,3 +195,23 @@ export async function deletePost(post_id) {
     console.log('Error writing post', e)
   }
 }
+
+
+export async function getTags() {
+
+  try {
+    const res = await pool.query(`SELECT TRIM(tag) AS tag, COUNT(*) AS frequency
+FROM (
+    SELECT unnest(tags) AS tag
+    FROM posts
+) AS unnested_tags
+GROUP BY TRIM(tag)
+ORDER BY frequency DESC`)
+    return res.rows
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
+
+
+}
