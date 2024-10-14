@@ -14,7 +14,7 @@ export default function Sidebar() {
         <div>
             <div className='sidebar-title ms-3 mt-4'>Users</div>
             <select class="form-select" size="6" aria-label="size 3 select example">
-                <option selected>All</option>
+                <option value='' selected>All</option>
                 {renderedUsers}
             </select>
         </div>

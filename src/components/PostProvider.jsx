@@ -15,7 +15,7 @@ export default function PostProvider({ children }) {
 
 
     useEffect(() => {
-        if (currentTag==='') {
+        if (currentTag === '') {
             getPosts()
         }
         else {
