@@ -11,11 +11,19 @@ export default function PostProvider({ children }) {
     const [tags, setTags] = useState([])
     const [comments, setComments] = useState([])
     const [loggedIn, setLoggedIn] = useState({})
-    const [currentTag, setCurrentTag] = useState(null)
+    const [currentTag, setCurrentTag] = useState('')
+   
+    useEffect(() => {
+        getPosts()
+        getUsers()
+        getTags()
+        checkLogin()
+    }, [])
 
 
     useEffect(() => {
-        if (currentTag === '') {
+       
+        if (currentTag==='') {
             getPosts()
         }
         else {
@@ -23,12 +31,7 @@ export default function PostProvider({ children }) {
         }
     }, [currentTag])
 
-    useEffect(() => {
-        getPosts()
-        getUsers()
-        getTags()
-        checkLogin()
-    }, [])
+ 
 
     function getPosts() {
         fetch('/posts')
