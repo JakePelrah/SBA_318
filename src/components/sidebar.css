@@ -26,7 +26,7 @@
 }
 
 .sidebar-title {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -37,7 +37,7 @@
 
 .form-select{
     background-color: var(--bg-color);
-    color: white;
+    color: rgb(255, 255, 255);
     scrollbar-color:  var(--post-color) var(--accent-color);
     border-radius: 0em;
     border: none;

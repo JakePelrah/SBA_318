@@ -3,7 +3,7 @@
     border-radius: 1em;
     margin-left: 12em;
     border: none;
-    color: var(--text-color) !important;
+    color: white;
 }
 
 .card-body {
@@ -13,7 +13,7 @@
 
 .card-header {
     background-color: var(--accent-color);
-    color: #EBF5EE;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -21,15 +21,10 @@
     background-color: var(--post-color);
 }
 
-.category {
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
-
 #post-view {
     background-color: var(--post-color);
     border-radius: .15em;
+    color: white;
 }
 
 .post-button,
@@ -41,6 +36,7 @@
 .badge {
     background-color: var(--accent-color) !important;
     margin: .25em;
+    color: black;
 }
 
 .post-title {
@@ -53,9 +49,11 @@
     border-radius: .25em;
 }
 
-.link {
+.link, .link:hover {
     font-weight: bold;
+    color: rgb(255, 254, 254);
 }
+
 
 hr {
     height: 1px !important;
@@ -77,6 +75,7 @@ hr {
 
 .comment-button, .comment-button:hover{
     background-color: var(--post-color);
+    color: white;
 }
 
 .delete-button, .delete-button:hover{
