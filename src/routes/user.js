@@ -17,7 +17,7 @@ router.get('/users', async (req, res) => {
 
 router.get('/tags', async(req, res)=>{
     const tags = await getTags()
-    if (tags.length > 0) {
+    if (tags?.length > 0) {
         res.json(tags)
     }
     else {

@@ -55,8 +55,7 @@ router.get('/getPostsByTag/:tagName', async (req, res) => {
     const { tagName } = req.params
     const tags = await getPostsByTag(tagName)
 
-    if (tags.length > 0) {
-
+    if (tags?.length > 0) {
         res.json(tags)
     }
     else {
