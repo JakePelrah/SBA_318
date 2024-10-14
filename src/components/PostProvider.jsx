@@ -15,8 +15,12 @@ export default function PostProvider({ children }) {
 
 
     useEffect(() => {
-        console.log(currentTag)
-        getPostsByTag(currentTag)
+        if (currentTag==='') {
+            getPosts()
+        }
+        else {
+            getPostsByTag(currentTag)
+        }
     }, [currentTag])
 
     useEffect(() => {

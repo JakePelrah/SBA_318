@@ -21,8 +21,8 @@ export default function Sidebar() {
 
         <div>
             <div className='sidebar-title ms-3 mt-4'>Tags</div>
-            <select class="form-select" size="6" aria-label="size 3 select example">
-                <option selected>All</option>
+            <select onChange={(e)=>setCurrentTag(e.target.value)} class="form-select" size="6" aria-label="size 3 select example">
+                <option value='' selected>All</option>
                 {renderedTags}
             </select>
         </div>
