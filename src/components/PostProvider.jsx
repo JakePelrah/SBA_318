@@ -177,11 +177,19 @@ export default function PostProvider({ children }) {
             .then(res => res.json())
             .then(setPosts)
     }
+
+
+    function submitSearch(e, searchTerm) {
+        e.preventDefault()
+        fetch(`/search?term=${searchTerm}`)
+            .then(res => res.json())
+            .then(setPosts)
+    }
     return (
         <PostContext.Provider value={{
             auth, loggedIn, logout,
             posts, users, tags, comments, currentPost,
-            createPost, deletePost,
+            createPost, deletePost, submitSearch,
             getPostById, getCommentsByPostId,
             createComment, patchComment, deleteComment,
             getPostsByTag, setCurrentTag, getPostsByUser, setCurrentUser

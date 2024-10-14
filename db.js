@@ -6,7 +6,7 @@ dotEnv.config();
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: 'postgres://u3lpng759h87ju:pb4bbc996e8da7006b53f469c4bae575523fcc937ffff54e66b5905545f749992@cbdhrtd93854d5.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d26c2qlbhpcaav',
+  connectionString: process.env.CONN_STR,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -235,7 +235,18 @@ export async function getPostsByUser(user) {
 FROM public.posts p
 JOIN public.users u ON p.user_id = u.user_id
 WHERE u.username = $1`, [user])
-    console.log(res.rows)
+    return res.rows
+  }
+  catch (e) {
+    return []
+  }
+}
+
+export async function submitSearch(searchTerm) {
+  try {
+    const res = await pool.query(`SELECT *
+FROM posts
+WHERE text ILIKE $1`, [`%${searchTerm}%`])
     return res.rows
   }
   catch (e) {

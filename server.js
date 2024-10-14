@@ -30,6 +30,12 @@ app.use(session({
 app.use(passport.authenticate('session'));
 
 
+///////////////////////////////// Error Handling /////////////////////////////////
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({ error: err.message });
+});
+
 ///////////////////////////////// Custom Middleware /////////////////////////////////
 
 //request stats

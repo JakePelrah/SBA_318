@@ -1,5 +1,8 @@
 import express from "express";
-import { insertPost, getPostById, getAllPosts, deletePost, getPostsByTag, getPostsByUser } from "../../db.js";
+import {
+    insertPost, getPostById, getAllPosts, deletePost,
+    getPostsByTag, getPostsByUser, submitSearch
+} from "../../db.js";
 
 export const router = express.Router()
 
@@ -53,8 +56,8 @@ router.get('/getPostsByTag/:tagName', async (req, res) => {
     const tags = await getPostsByTag(tagName)
 
     if (tags.length > 0) {
-     
-       res.json(tags)
+
+        res.json(tags)
     }
     else {
         res.json([])
@@ -67,8 +70,25 @@ router.get('/getPostsByUser/:username', async (req, res) => {
     const posts = await getPostsByUser(username)
 
     if (posts.length > 0) {
-     
-       res.json(posts)
+
+        res.json(posts)
+    }
+    else {
+        res.json([])
+    }
+})
+
+
+router.get('/search', async (req, res) => {
+
+    const { term } = req.query
+    const posts = await submitSearch(term)
+
+    console.log(posts, term)
+
+    if (posts.length > 0) {
+
+        res.json(posts)
     }
     else {
         res.json([])
