@@ -23,7 +23,6 @@ export default function PostProvider({ children }) {
     }, [])
 
     useEffect(() => {
-        console.log(currentUser)
         if (currentUser === '') {
             getPosts()
         }

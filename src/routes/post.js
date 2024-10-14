@@ -10,7 +10,6 @@ router.post('/createPost', (req, res) => {
     const { id } = req.user
     const { title, text, tags } = req.body
     try {
-        console.log(tags)
         insertPost(id, title, text, tags)
             .then(() => res.json({ created: true }))
     }
@@ -65,7 +64,6 @@ router.get('/getPostsByTag/:tagName', async (req, res) => {
 
 router.get('/getPostsByUser/:username', async (req, res) => {
     const { username } = req.params
-    console.log(username)
     const posts = await getPostsByUser(username)
 
     if (posts.length > 0) {
@@ -83,7 +81,6 @@ router.get('/search', async (req, res) => {
     const { term } = req.query
     const posts = await submitSearch(term)
 
-    console.log(posts, term)
 
     if (posts.length > 0) {
 
