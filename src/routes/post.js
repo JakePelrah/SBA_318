@@ -1,5 +1,5 @@
 import express from "express";
-import { insertPost, getPostById, getAllPosts, deletePost, getPostsByTag } from "../../db.js";
+import { insertPost, getPostById, getAllPosts, deletePost, getPostsByTag, getPostsByUser } from "../../db.js";
 
 export const router = express.Router()
 
@@ -55,6 +55,20 @@ router.get('/getPostsByTag/:tagName', async (req, res) => {
     if (tags.length > 0) {
      
        res.json(tags)
+    }
+    else {
+        res.json([])
+    }
+})
+
+router.get('/getPostsByUser/:username', async (req, res) => {
+    const { username } = req.params
+    console.log(username)
+    const posts = await getPostsByUser(username)
+
+    if (posts.length > 0) {
+     
+       res.json(posts)
     }
     else {
         res.json([])

@@ -72,7 +72,7 @@ export async function insertPost(userId, title, text, tags) {
   try {
     await pool.query(`INSERT INTO posts 
       (post_id, user_id, title, text, tags, timestamp)
-      VALUES ($1, $2, $3, $4, $5, $6)`, [uuidv4(), userId, title, text, tags.map(tag=>tag.trim()), new Date().toLocaleString()])
+      VALUES ($1, $2, $3, $4, $5, $6)`, [uuidv4(), userId, title, text, tags.map(tag => tag.trim()), new Date().toLocaleString()])
   }
   catch (e) {
     console.log('Error writing post', e)
@@ -134,6 +134,8 @@ export async function getUsers(params) {
     return []
   }
 }
+
+
 
 export async function getCommentsByPostId(id) {
   try {
@@ -224,5 +226,19 @@ WHERE $1 = ANY(tags);`, [tag])
   }
   catch (e) {
     console.log('Error writing post', e)
+  }
+}
+
+export async function getPostsByUser(user) {
+  try {
+    const res = await pool.query(`SELECT p.post_id, p.title, p.text, p.tags, p.timestamp
+FROM public.posts p
+JOIN public.users u ON p.user_id = u.user_id
+WHERE u.username = $1`, [user])
+    console.log(res.rows)
+    return res.rows
+  }
+  catch (e) {
+    return []
   }
 }

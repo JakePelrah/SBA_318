@@ -12,7 +12,9 @@ export default function PostProvider({ children }) {
     const [comments, setComments] = useState([])
     const [loggedIn, setLoggedIn] = useState({})
     const [currentTag, setCurrentTag] = useState('')
-   
+    const [currentUser, setCurrentUser] = useState('')
+
+
     useEffect(() => {
         getPosts()
         getUsers()
@@ -20,10 +22,20 @@ export default function PostProvider({ children }) {
         checkLogin()
     }, [])
 
+    useEffect(() => {
+        console.log(currentUser)
+        if (currentUser === '') {
+            getPosts()
+        }
+        else {
+            getPostsByUser(currentUser)
+        }
+    }, [currentUser])
+
 
     useEffect(() => {
-       
-        if (currentTag==='') {
+
+        if (currentTag === '') {
             getPosts()
         }
         else {
@@ -31,7 +43,7 @@ export default function PostProvider({ children }) {
         }
     }, [currentTag])
 
- 
+
 
     function getPosts() {
         fetch('/posts')
@@ -160,6 +172,11 @@ export default function PostProvider({ children }) {
             .then(setPosts)
     }
 
+    function getPostsByUser(username) {
+        fetch(`/getPostsByUser/${username}`)
+            .then(res => res.json())
+            .then(setPosts)
+    }
     return (
         <PostContext.Provider value={{
             auth, loggedIn, logout,
@@ -167,7 +184,7 @@ export default function PostProvider({ children }) {
             createPost, deletePost,
             getPostById, getCommentsByPostId,
             createComment, patchComment, deleteComment,
-            getPostsByTag, setCurrentTag
+            getPostsByTag, setCurrentTag, getPostsByUser, setCurrentUser
         }}>
             {children}
         </PostContext.Provider>
