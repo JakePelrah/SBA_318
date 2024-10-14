@@ -9,7 +9,7 @@ export default function PostView() {
     const { id } = useParams()
     const [newComment, setNewComment] = useState('')
 
-    console.log(currentPost)
+
     useEffect(() => {
         getPostById(id)
         getCommentsByPostId(id)

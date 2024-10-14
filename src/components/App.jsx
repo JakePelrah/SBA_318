@@ -3,7 +3,6 @@ import Sidebar from './Sidebar'
 import { usePost } from './PostProvider'
 import Navbar from './Navbar'
 import Modal from './Modal'
-import { useEffect } from 'react'
 
 function App() {
   const { posts } = usePost()
@@ -14,8 +13,6 @@ function App() {
     timestamp={post.timestamp}
     tags={post.tags}
     postId={post.post_id} />)
-
-
 
   return (
     <>

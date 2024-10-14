@@ -16,7 +16,7 @@ export default function PostProvider({ children }) {
         getPosts()
         getUsers()
         getTags()
-        getPostsByTag()
+        getPostsByTag('React')
         checkLogin()
     }, [])
 
