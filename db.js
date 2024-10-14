@@ -6,7 +6,7 @@ dotEnv.config();
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.CONN_STR,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
