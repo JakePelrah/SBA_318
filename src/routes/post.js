@@ -1,13 +1,13 @@
 import express from "express";
-import { insertPost, getPostById, getAllPosts, deletePost } from "../../db.js";
+import { insertPost, getPostById, getAllPosts, deletePost, getPostsByTag } from "../../db.js";
 
 export const router = express.Router()
-
 
 router.post('/createPost', (req, res) => {
     const { id } = req.user
     const { title, text, tags } = req.body
     try {
+        console.log(tags)
         insertPost(id, title, text, tags)
             .then(() => res.json({ created: true }))
     }
@@ -48,3 +48,15 @@ router.delete('/deletePost', async (req, res) => {
     }
 })
 
+router.get('/getPostsByTag/:tagName', async (req, res) => {
+    const { tagName } = req.params
+    const tags = await getPostsByTag(tagName)
+
+    if (tags.length > 0) {
+     
+       res.json(tags)
+    }
+    else {
+        res.json([])
+    }
+})

@@ -16,6 +16,7 @@ export default function PostProvider({ children }) {
         getPosts()
         getUsers()
         getTags()
+        getPostsByTag()
         checkLogin()
     }, [])
 
@@ -36,7 +37,6 @@ export default function PostProvider({ children }) {
             .then(res => res.json())
             .then(setTags)
     }
-
 
     function checkLogin() {
         fetch('/checkLogin')
@@ -141,13 +141,20 @@ export default function PostProvider({ children }) {
             .then(({ deleted }) => deleted ? window.location.href = '/' : null)
     }
 
+    function getPostsByTag(tag) {
+        fetch(`/getPostsByTag/${tag}`)
+            .then(res => res.json())
+            .then(console.log)
+    }
+
     return (
         <PostContext.Provider value={{
             auth, loggedIn, logout,
             posts, users, tags, comments, currentPost,
             createPost, deletePost,
             getPostById, getCommentsByPostId,
-            createComment, patchComment, deleteComment
+            createComment, patchComment, deleteComment,
+            getPostsByTag
         }}>
             {children}
         </PostContext.Provider>

@@ -26,7 +26,6 @@ router.post('/createComment', (req, res) => {
     }
 })
 
-
 router.patch('/patchComment', (req, res) => {
     const { text, comment_id } = req.body
     try {

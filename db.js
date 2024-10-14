@@ -72,7 +72,7 @@ export async function insertPost(userId, title, text, tags) {
   try {
     await pool.query(`INSERT INTO posts 
       (post_id, user_id, title, text, tags, timestamp)
-      VALUES ($1, $2, $3, $4, $5, $6)`, [uuidv4(), userId, title, text, tags, new Date().toLocaleString()])
+      VALUES ($1, $2, $3, $4, $5, $6)`, [uuidv4(), userId, title, text, tags.map(tag=>tag.trim()), new Date().toLocaleString()])
   }
   catch (e) {
     console.log('Error writing post', e)
@@ -212,6 +212,17 @@ ORDER BY frequency DESC`)
   catch (e) {
     console.log('Error writing post', e)
   }
+}
 
-
+export async function getPostsByTag(tag) {
+  try {
+    const res = await pool.query(`
+    SELECT *
+FROM posts
+WHERE $1 = ANY(tags);`, [tag])
+    return res.rows
+  }
+  catch (e) {
+    console.log('Error writing post', e)
+  }
 }
