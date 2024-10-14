@@ -34,3 +34,12 @@
 .uuid{
     font-size: .75em;
 }
+
+.form-select{
+    background-color: var(--bg-color);
+    color: white;
+    scrollbar-color:  var(--post-color) var(--accent-color);
+    border-radius: 0em;
+    border: none;
+    box-shadow: none !important;
+}

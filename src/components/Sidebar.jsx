@@ -5,31 +5,26 @@ export default function Sidebar() {
     const { users, tags, loggedIn, setCurrentTag } = usePost()
 
 
-    const renderedUsers = users.map(user => <li key={user.user_id} className="list-group-item">
-        <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
-        {user.username}
-        <div className='uuid'>({user.user_id})</div>
-    </li>)
+    const renderedUsers = users.map(user => <option key={user.user_id} value={user.username}>{user.username}</option>)
 
-    const renderedTags = tags?.map(tag => <li key={tag.tag} className="list-group-item">
-        <input onInput={(e) => setCurrentTag(e.target.value)} className="form-check-input me-1" type="checkbox" value={tag.tag} id="firstCheckbox" />
-        {tag.tag}
-        <div className='uuid'>({tag.frequency})</div>
-    </li>)
+    const renderedTags = tags?.map(tag => <option key={tag.tag} value={tag.tag}>{tag.tag}</option>)
 
     return (<div className="sidebar">
+
         <div>
-            <div className='sidebar-title ms-3 mt-5'>Users</div>
-            <ul className="list-group">
+            <div className='sidebar-title ms-3 mt-4'>Users</div>
+            <select class="form-select" size="6" aria-label="size 3 select example">
+                <option selected>All</option>
                 {renderedUsers}
-            </ul>
+            </select>
         </div>
 
         <div>
-            <div className='sidebar-title ms-3 mt-2'>Tags</div>
-            <ul className="list-group">
+            <div className='sidebar-title ms-3 mt-4'>Tags</div>
+            <select class="form-select" size="6" aria-label="size 3 select example">
+                <option selected>All</option>
                 {renderedTags}
-            </ul>
+            </select>
         </div>
 
         <div className='d-flex justify-content-center'>

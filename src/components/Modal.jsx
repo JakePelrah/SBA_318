@@ -55,7 +55,7 @@ export default function Modal() {
                 <div className="form-text">Comma separated tags</div>
               </div>
 
-              <button onClick={validateForm} className="btn btn-primary">Save</button>
+              <button onClick={validateForm} className="btn custom-button">Save</button>
             </form>
           </div>
 
