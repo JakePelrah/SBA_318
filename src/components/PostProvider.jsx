@@ -15,15 +15,14 @@ export default function PostProvider({ children }) {
 
 
     useEffect(() => {
+        console.log(currentTag)
         getPostsByTag(currentTag)
-
     }, [currentTag])
 
     useEffect(() => {
         getPosts()
         getUsers()
         getTags()
-
         checkLogin()
     }, [])
 

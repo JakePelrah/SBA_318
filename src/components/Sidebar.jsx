@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { usePost } from './PostProvider'
 import './sidebar.css'
 
@@ -13,7 +12,7 @@ export default function Sidebar() {
     </li>)
 
     const renderedTags = tags?.map(tag => <li key={tag.tag} className="list-group-item">
-        <input onClick={(e)=>setCurrentTag(e.target.value)} className="form-check-input me-1" type="checkbox" value={tag.tag} id="firstCheckbox" />
+        <input onInput={(e) => setCurrentTag(e.target.value)} className="form-check-input me-1" type="checkbox" value={tag.tag} id="firstCheckbox" />
         {tag.tag}
         <div className='uuid'>({tag.frequency})</div>
     </li>)
