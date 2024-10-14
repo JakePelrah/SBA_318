@@ -10,8 +10,9 @@ Create an account to make new posts and comment on existing posts. Users can del
 
 
 Project is available here:  [Tech Blog]( https://sba318-1fe8e26dd2ce.herokuapp.com/)
+
 Data is being hosted on Heroku using PostgreSQL.
 
-To run locally, check submission commnets for DATABASE_URL
+To run locally, check submission comments for DATABASE_URL
 
 
