@@ -11,12 +11,19 @@ export default function PostProvider({ children }) {
     const [tags, setTags] = useState([])
     const [comments, setComments] = useState([])
     const [loggedIn, setLoggedIn] = useState({})
+    const [currentTag, setCurrentTag] = useState(null)
+
+
+    useEffect(() => {
+        getPostsByTag(currentTag)
+
+    }, [currentTag])
 
     useEffect(() => {
         getPosts()
         getUsers()
         getTags()
-        getPostsByTag('React')
+
         checkLogin()
     }, [])
 
@@ -144,7 +151,7 @@ export default function PostProvider({ children }) {
     function getPostsByTag(tag) {
         fetch(`/getPostsByTag/${tag}`)
             .then(res => res.json())
-            .then(console.log)
+            .then(setPosts)
     }
 
     return (
@@ -154,7 +161,7 @@ export default function PostProvider({ children }) {
             createPost, deletePost,
             getPostById, getCommentsByPostId,
             createComment, patchComment, deleteComment,
-            getPostsByTag
+            getPostsByTag, setCurrentTag
         }}>
             {children}
         </PostContext.Provider>
