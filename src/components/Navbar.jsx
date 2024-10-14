@@ -29,7 +29,7 @@ export default function Navbar() {
                     <div class="form-check">
                         <input value={register} onChange={(e) => setRegister(e.target.checked)} class="form-check-input" type="checkbox" id="flexCheckDefault" />
                         <label className='text-white' for="flexCheckDefault">
-                            Register?
+                            Register
                         </label>
                     </div>
                 </form>
